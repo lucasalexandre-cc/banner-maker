@@ -1,18 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { shadows } from 'modules/shared/styles';
-import { Banner } from 'modules/banners/components';
+import { shadows, colors } from 'modules/shared/styles';
+import { Banner, AddBannerButton } from 'modules/banners/components';
+import { banners } from 'fake-data';
 
 const BannersListPage: React.FC = () => {
   return (
     <Container>
       <Title>Lista de banners</Title>
       <ListContainer>
-        <Banner />
-        <Banner />
-        <Banner />
+        {banners.map(banner => (
+          <Banner key={banner.id} data={banner} />
+        ))}
       </ListContainer>
+      <AddBannerButton />
     </Container>
   );
 }

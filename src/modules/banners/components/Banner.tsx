@@ -5,7 +5,15 @@ import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { colors } from 'modules/shared/styles';
 
-const Banner: React.FC = () => {
+type BannerData = {
+  data: {
+    id: number,
+    name: string,
+  }
+};
+
+const Banner: React.FC<BannerData> = ({ data }) => {
+  console.log(data);
   const onEditClick = useCallback(() => {
     // TO-DO redirect to edit page
     console.log("Click on edit");
@@ -18,7 +26,7 @@ const Banner: React.FC = () => {
 
   return (
     <Container>
-      <Name>Banner 01</Name>
+      <Name>{data.name}</Name>
       <ButtonsContainer>
         <CustomIcon icon={faEdit} color={colors.warningOrangeColor} onClick={onEditClick} />
         <CustomIcon icon={faTrash} color={colors.warningRedColor} onClick={onDeleteClick} />
