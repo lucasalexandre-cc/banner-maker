@@ -2,16 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Header } from 'modules/shared/components';
+import { BaseDialog } from 'modules/shared/dialogs';
 import { LoggedRouter } from 'modules/shared/routes';
+import RootProviders from 'modules/shared/providers/RootProviders';
 
 const App: React.FC = () => {
 
   const userLogged = true;
   return (
-    <Container>
-      <Header />
-      { userLogged && <LoggedRouter /> }
-    </Container>
+    <RootProviders>
+      <Container>
+        <Header />
+        { userLogged && <LoggedRouter /> }
+        <BaseDialog />
+      </Container>
+    </RootProviders>
   );
 }
 

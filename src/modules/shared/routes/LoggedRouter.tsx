@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { BannersListPage } from 'modules/banners/pages';
+import { BrowserRouter, Switch } from 'react-router-dom';
+import BannerLoggedRouter from 'modules/banners/routes/BannerLoggedRouter';
 
 const LoggedRouter: React.FC = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={BannersListPage} />
+        <BannerLoggedRouter />
       </Switch>
     </BrowserRouter>
   );

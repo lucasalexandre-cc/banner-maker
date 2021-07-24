@@ -7,11 +7,11 @@ type AddBannerParams = {
   onClick: () => void,
 }
 
-const AddBannerButton: React.FC<AddBannerParams> = ({ onClick }) => {
+const AddElementToBannerButton: React.FC<AddBannerParams> = ({ onClick }) => {
   return (
     <Container onClick={onClick}>
       <CustonIcon icon={faPlusCircle} />
-      <Text>Criar banner</Text>
+      <Text>Adicionar elemento</Text>
     </Container>
   );
 }
@@ -31,4 +31,4 @@ const Text = styled.div`
   margin-left: 8px;
 `;
 
-export default AddBannerButton;
+export default AddElementToBannerButton;

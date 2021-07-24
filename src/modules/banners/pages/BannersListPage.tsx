@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
+import { useHistory } from "react-router-dom";
 
-import { shadows, colors } from 'modules/shared/styles';
+import { shadows, } from 'modules/shared/styles';
 import { Banner, AddBannerButton } from 'modules/banners/components';
 import { banners } from 'fake-data';
 
 const BannersListPage: React.FC = () => {
+  const history = useHistory();
+
+  const onClickCreateBanner = useCallback(() => {
+    history.push('/create');
+  }, []);
+
   return (
     <Container>
       <Title>Lista de banners</Title>
@@ -14,7 +21,7 @@ const BannersListPage: React.FC = () => {
           <Banner key={banner.id} data={banner} />
         ))}
       </ListContainer>
-      <AddBannerButton />
+      <AddBannerButton onClick={onClickCreateBanner} />
     </Container>
   );
 }
