@@ -1,4 +1,9 @@
-import { StripDialog, TitleDialog, SubtitleDialog } from 'modules/banners/dialogs';
+import { 
+  StripDialog, 
+  TitleDialog, 
+  SubtitleDialog, 
+  ButtonDialog 
+} from 'modules/banners/dialogs';
 
 const desktopBannerElements = [
   {
@@ -39,7 +44,19 @@ const desktopBannerElements = [
       }
     },
     getDialog: () => <SubtitleDialog />,
-  }
+  },
+  {
+    id: 'button',
+    cta: 'Adicionar um botão',
+    defaultData: {
+      button: {
+        text: 'Frase do botao',
+        fontColor: '#FFF',
+        backgroundColor: '#ca12b2',
+      }
+    },
+    getDialog: () => <ButtonDialog />,
+  },
 ];
 
 export { desktopBannerElements };

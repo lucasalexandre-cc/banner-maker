@@ -3,6 +3,7 @@ type DesktopBannerContainerData = {
   backgroundColor?: string,
   backgroundColorLinear01?: string,
   backgroundColorLinear02?: string,
+  redirectLink?: string,
 };
 
 type DesktopBannerStripData = {
@@ -22,11 +23,18 @@ type DesktopBannerSubtitleData = {
   size: string
 }
 
+type DesktopBannerButtonData = {
+  text: string,
+  fontColor: string,
+  backgroundColor: string
+}
+
 type DesktopBannerData = {
   container: DesktopBannerContainerData,
   strip?: DesktopBannerStripData,
   title?: DesktopBannerTitleData,
-  subtitle?: DesktopBannerSubtitleData
+  subtitle?: DesktopBannerSubtitleData,
+  button?: DesktopBannerButtonData
 };
 
 type DesktopBannerLightData = {
@@ -47,6 +55,7 @@ export type {
   DesktopBannerStripData,
   DesktopBannerTitleData,
   DesktopBannerSubtitleData,
+  DesktopBannerButtonData,
   DesktopBannerData,
   DesktopBannerLightData,
   DesktopBannerContextData

@@ -28,6 +28,7 @@ const ContainerDialog: React.FC = () => {
       if(!container.backgroundColorLinear02 || container.backgroundColorLinear02[0] !== '#') return false;
     }
 
+    if(!container?.redirectLink) return false;
     return true;
   }, [container]);
 
@@ -70,7 +71,6 @@ const ContainerDialog: React.FC = () => {
     )
   }, [container, onUpdateInput]);
 
-  console.log(container);
   return (
     <DefaultDialogContainer>
       <Title>Edite o container do banner</Title>
@@ -83,6 +83,13 @@ const ContainerDialog: React.FC = () => {
         </RadioGroup>
 
         {getContainerBackgroundInputContainer()}
+        <CustomInput
+          required
+          label="Link de redirect do banner"
+          value={container?.redirectLink}
+          onChange={event => onUpdateInput('redirectLink', event.target.value)}
+          variant="outlined"
+        />
         <CustomButton onClick={onSaveContainer}>Salvar</CustomButton>
       </Form>
     </DefaultDialogContainer>
@@ -113,6 +120,11 @@ const CustomButton = styled.button`
   padding: 10px 20px;
   background-color: #000;
   color: #FFF;
+`;
+
+const CustomInput = styled(TextField)`
+  width: 100%;
+  margin: 10px 0;
 `;
 
 export default ContainerDialog;

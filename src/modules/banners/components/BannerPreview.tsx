@@ -9,9 +9,16 @@ import type {
   DesktopBannerContainerData,
   DesktopBannerLightData,
   DesktopBannerTitleData,
-  DesktopBannerSubtitleData
+  DesktopBannerSubtitleData,
+  DesktopBannerButtonData
 } from 'modules/banners/types';
-import { StripDialog, ContainerDialog, TitleDialog, SubtitleDialog } from 'modules/banners/dialogs';
+import { 
+  StripDialog, 
+  ContainerDialog, 
+  TitleDialog, 
+  SubtitleDialog,
+  ButtonDialog
+} from 'modules/banners/dialogs';
 
 type BannerPreviewProp = {
   bannerData?: DesktopBannerLightData
@@ -40,6 +47,11 @@ const BannerPreview: React.FC<BannerPreviewProp> = (props) => {
     dialogContext?.setDialog(<SubtitleDialog />);
   }, [dialogContext]);
 
+  const onBannerButtonClick = useCallback((event) => {
+    event.stopPropagation();
+    dialogContext?.setDialog(<ButtonDialog />);
+  }, [dialogContext]);
+
   let bannerData = desktopBannerContext?.bannerData;
   if(!bannerData) return null;
   if(props.bannerData) bannerData = { ...bannerData, ...props.bannerData };
@@ -52,6 +64,7 @@ const BannerPreview: React.FC<BannerPreviewProp> = (props) => {
         {bannerData.title && <TextTitle {...bannerData.title} onClick={onBannerTitleClick}>{bannerData.title.text}</TextTitle>}
         {bannerData.subtitle && <TextSubtitle {...bannerData.subtitle} onClick={onBannerSubtitleClick}>{bannerData.subtitle.text}</TextSubtitle>}
       </TextContainer>
+      {bannerData.button && <Button {...bannerData.button} onClick={onBannerButtonClick}>{bannerData.button.text}</Button>}
     </Container>
   );
 }
@@ -60,7 +73,7 @@ const Container = styled.div<DesktopBannerContainerData>`
   position: relative;
   overflow: hidden;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   width: 100%;
   height: 120px;
@@ -103,6 +116,17 @@ const TextSubtitle = styled.h1<DesktopBannerSubtitleData>`
   text-align: center;
   color: ${({fontColor}) => fontColor };
   margin-top: 5px;
+`;
+
+const Button = styled.div<DesktopBannerButtonData>`
+  max-width: 350px;
+  padding: 20px 30px;
+  background-color: ${({backgroundColor}) => backgroundColor || "#000"};
+  color: ${({fontColor}) => fontColor || "#FFF"};
+  border-radius: 30px;
+  font-size: 1.1em;
+  font-weight: bold;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
 `;
 
 export default BannerPreview;
