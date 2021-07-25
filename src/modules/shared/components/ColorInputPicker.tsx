@@ -5,7 +5,7 @@ import { CompactPicker } from 'react-color';
 type ColorInputPickerProps = {
   label: string,
   onChange: (newColor: string) => void,
-  color: string,
+  color?: string,
 }
 
 const ColorInputPicker: React.FC<ColorInputPickerProps> = ({ label, color, onChange }) => {  
@@ -42,7 +42,7 @@ const Container = styled.div`
 const PickedColor = styled.div`
   width: 20px;
   height: 20px;
-  background-color: ${({color}) => color};
+  background-color: ${({color}) => color || "#000"};
   margin: 0 10px;
 `;
 

@@ -9,7 +9,7 @@ import type {
   DesktopBannerContainerData,
   DesktopBannerLightData
 } from 'modules/banners/types';
-import { StripDialog } from 'modules/banners/dialogs';
+import { StripDialog, ContainerDialog } from 'modules/banners/dialogs';
 
 type BannerPreviewProp = {
   bannerData?: DesktopBannerLightData
@@ -20,7 +20,7 @@ const BannerPreview: React.FC<BannerPreviewProp> = (props) => {
   const dialogContext = useDialogContext();
 
   const onBannerContainerClick = useCallback(() => {
-
+    dialogContext?.setDialog(<ContainerDialog />);
   }, []);
 
   const onBannerStripClick = useCallback((event) => {
@@ -31,6 +31,7 @@ const BannerPreview: React.FC<BannerPreviewProp> = (props) => {
   let bannerData = desktopBannerContext?.bannerData;
   if(!bannerData) return null;
   if(props.bannerData) bannerData = { ...bannerData, ...props.bannerData };
+
   return (
     <Container {...bannerData.container} onClick={onBannerContainerClick}>
       {bannerData.strip && <Strip {...bannerData.strip} onClick={onBannerStripClick}>{bannerData.strip.text}</Strip>}
@@ -45,9 +46,9 @@ const Container = styled.div<DesktopBannerContainerData>`
   display: flex;
   width: 100%;
   height: 120px;
-  ${({ backgroundType, backgroundColor, backgroundColorLinear01 }) => {
+  ${({ backgroundType, backgroundColor, backgroundColorLinear01, backgroundColorLinear02 }) => {
     if(backgroundType === 'normal') return `background-color: ${backgroundColor};`
-    return `background-image: linear-gradient(to right, ${backgroundColorLinear01}, ${backgroundColorLinear01});`
+    return `background-image: linear-gradient(to right, ${backgroundColorLinear01}, ${backgroundColorLinear02});`
   }}
   cursor: pointer;
 `;
