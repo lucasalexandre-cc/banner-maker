@@ -5,11 +5,32 @@ type DesktopBannerContainerData = {
   backgroundColorLinear02?: string,
 };
 
+type DesktopBannerStripData = {
+  text: string,
+  fontColor: string,
+  backgroundColor: string
+}
+
 type DesktopBannerData = {
-  container: DesktopBannerContainerData
+  container: DesktopBannerContainerData,
+  strip?: DesktopBannerStripData
 };
+
+type DesktopBannerLightData = {
+  container?: DesktopBannerContainerData,
+  strip?: DesktopBannerStripData
+};
+
+type DesktopBannerContextData = {
+  bannerData: DesktopBannerData,
+  updateBannerData: (key: string, value: any) => void,
+  deleteData: (key: any) => void
+}
 
 export type {
   DesktopBannerContainerData,
-  DesktopBannerData
+  DesktopBannerStripData,
+  DesktopBannerData,
+  DesktopBannerLightData,
+  DesktopBannerContextData
 };

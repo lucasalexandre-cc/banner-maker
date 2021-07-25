@@ -1,13 +1,14 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 
+import { BaseDialog } from 'modules/shared/dialogs';
 import { shadows } from 'modules/shared/styles';
 import { BannerPreview, AddElementToBannerButton } from 'modules/banners/components';
 import { AddElementDialog } from 'modules/banners/dialogs';
 import { DesktopBannerProvider } from 'modules/banners/providers';
 import { useDialogContext } from 'modules/shared/providers/DialogProvider';
 
-const CreateBannerPage: React.FC = () => {
+const CreateBannerPage: React.FC = (props) => {
   const dialogContext = useDialogContext();
 
   const openAddElementDialog = useCallback(() => {
@@ -21,6 +22,7 @@ const CreateBannerPage: React.FC = () => {
         <BannerPreview />
         <AddElementToBannerButton onClick={openAddElementDialog} />
       </Container>
+      <BaseDialog />
     </DesktopBannerProvider>
   );
 }
