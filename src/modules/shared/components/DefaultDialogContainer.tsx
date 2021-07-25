@@ -17,7 +17,7 @@ const DefaultDialogContainer: React.FC<DialogContainerProps> = ({ children, data
 
   const onCloseDialog = useCallback(() => {
     dialogContext?.unsetDialog();
-  }, []);
+  }, [dialogContext]);
 
   return (
     <Container>

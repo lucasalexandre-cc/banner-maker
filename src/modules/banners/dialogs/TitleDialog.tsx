@@ -35,12 +35,12 @@ const TitleDialog: React.FC = () => {
 
     desktopBannerContext?.updateBannerData('title', title);
     dialogContext?.unsetDialog();
-  }, [validateTitleData, desktopBannerContext, title]);
+  }, [validateTitleData, desktopBannerContext, title, dialogContext]);
 
   const onDeleteTitle = useCallback(() => {
     desktopBannerContext?.deleteData('title');
     dialogContext?.unsetDialog();
-  }, [desktopBannerContext, title]);
+  }, [desktopBannerContext, dialogContext]);
 
   return (
     <DefaultDialogContainer>

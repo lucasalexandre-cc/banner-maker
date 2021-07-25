@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
-import _ from 'lodash';
 
 import { colors } from 'modules/shared/styles';
 

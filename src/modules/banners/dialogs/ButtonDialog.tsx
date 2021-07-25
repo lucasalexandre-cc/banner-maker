@@ -36,12 +36,12 @@ const ButtonDialog: React.FC = () => {
 
     desktopBannerContext?.updateBannerData('button', button);
     dialogContext?.unsetDialog();
-  }, [validateButtonData, desktopBannerContext, button]);
+  }, [validateButtonData, desktopBannerContext, button, dialogContext]);
 
   const onDeleteButton = useCallback(() => {
     desktopBannerContext?.deleteData('button');
     dialogContext?.unsetDialog();
-  }, [validateButtonData, desktopBannerContext, button]);
+  }, [desktopBannerContext, dialogContext]);
 
   return (
     <DefaultDialogContainer>

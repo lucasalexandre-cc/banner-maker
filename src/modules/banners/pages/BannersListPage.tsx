@@ -11,7 +11,7 @@ const BannersListPage: React.FC = () => {
 
   const onClickCreateBanner = useCallback(() => {
     history.push('/create');
-  }, []);
+  }, [history]);
 
   return (
     <Container>

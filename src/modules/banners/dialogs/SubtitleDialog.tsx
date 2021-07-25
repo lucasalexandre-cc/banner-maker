@@ -36,12 +36,12 @@ const SubtitleDialog: React.FC = () => {
 
     desktopBannerContext?.updateBannerData('subtitle', subtitle);
     dialogContext?.unsetDialog();
-  }, [validateSubtitleData, desktopBannerContext, subtitle]);
+  }, [validateSubtitleData, desktopBannerContext, subtitle, dialogContext]);
 
   const onDeleteSubtitle = useCallback(() => {
     desktopBannerContext?.deleteData('subtitle');
     dialogContext?.unsetDialog();
-  }, [desktopBannerContext, subtitle]);
+  }, [desktopBannerContext, dialogContext]);
 
   const sizeTypes = useMemo(() => {
     return [{name: 'Normal', value: 'normal'}, {name: 'Grande', value: 'big'}];

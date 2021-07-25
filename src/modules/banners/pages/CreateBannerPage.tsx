@@ -13,7 +13,7 @@ const CreateBannerPage: React.FC = (props) => {
 
   const openAddElementDialog = useCallback(() => {
     dialogContext?.setDialog(<AddElementDialog />)
-  }, []);
+  }, [dialogContext]);
 
   return (
     <DesktopBannerProvider>

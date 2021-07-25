@@ -40,7 +40,7 @@ const ContainerDialog: React.FC = () => {
 
     desktopBannerContext?.updateBannerData('container', container);
     dialogContext?.unsetDialog();
-  }, [validateContainerData, desktopBannerContext, container]);
+  }, [validateContainerData, desktopBannerContext, container, dialogContext]);
 
   const backgroundTypes = useMemo(() => {
     return [{name: 'Normal', value: 'normal'}, {name: 'Degrade', value: 'linear-gradient'}];

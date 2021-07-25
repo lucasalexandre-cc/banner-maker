@@ -36,12 +36,12 @@ const StripDialog: React.FC = () => {
 
     desktopBannerContext?.updateBannerData('strip', strip);
     dialogContext?.unsetDialog();
-  }, [validateStripData, desktopBannerContext, strip]);
+  }, [validateStripData, desktopBannerContext, strip, dialogContext]);
 
   const onDeleteStrip = useCallback(() => {
     desktopBannerContext?.deleteData('strip');
     dialogContext?.unsetDialog();
-  }, [validateStripData, desktopBannerContext, strip]);
+  }, [desktopBannerContext, dialogContext]);
 
   return (
     <DefaultDialogContainer>
