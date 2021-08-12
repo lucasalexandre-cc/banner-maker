@@ -23,7 +23,7 @@ const DesktopBannerProvider: React.FC<ProviderPropsData> = (props) => {
   }, [bannerData, setBannerData]);
 
   return (
-    <DesktopBannerContext.Provider value={{bannerData, updateBannerData,deleteData}}>
+    <DesktopBannerContext.Provider value={{bannerData, updateBannerData, deleteData}}>
       {props.children}
     </DesktopBannerContext.Provider>
   )

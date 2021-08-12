@@ -8,7 +8,7 @@ import { AddElementDialog } from 'modules/banners/dialogs';
 import { DesktopBannerProvider } from 'modules/banners/providers';
 import { useDialogContext } from 'modules/shared/providers/DialogProvider';
 
-const CreateBannerPage: React.FC = (props) => {
+const CreateBannerPage: React.FC = () => {
   const dialogContext = useDialogContext();
 
   const openAddElementDialog = useCallback(() => {

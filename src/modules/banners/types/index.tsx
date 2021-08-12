@@ -44,6 +44,7 @@ type DesktopBannerLightData = {
   subtitle?: DesktopBannerSubtitleData
 };
 
+// to-do remove any
 type DesktopBannerContextData = {
   bannerData: DesktopBannerData,
   updateBannerData: (key: string, value: any) => void,

@@ -31,7 +31,7 @@ const AddElementDialog: React.FC = () => {
       {filteredElements.map(element => (
         <Element key={element.id} onClick={event => onClickElement(event, element)}>
           <ElementName>{element.cta}</ElementName>
-          <BannerPreview bannerData={element.defaultData} />
+          <BannerPreview bannerData={element.defaultData} disableClick={true} />
         </Element>
       ))}
     </DefaultDialogContainer>

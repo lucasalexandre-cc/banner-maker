@@ -33,7 +33,6 @@ const style: ReactModal.Styles = {
 const BaseDialog: React.FC = () => {
   const dialogContext = useDialogContext();
 
-
   const dialog = dialogContext?.dialog;
   return (
     <ReactModal style={style} isOpen={!!dialog}>

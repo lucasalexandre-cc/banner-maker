@@ -48,6 +48,7 @@ const PickedColor = styled.div`
 
 const CustomPicker = styled(CompactPicker)`
   position: absolute;
+  z-index: 2;
 `;
 
 export default ColorInputPicker;

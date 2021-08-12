@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { useDesktopBannerContext } from 'modules/banners/providers/DesktopBannerProvider';
 import { useDialogContext } from 'modules/shared/providers/DialogProvider';
 import type { 
-  DesktopBannerContextData,
   DesktopBannerStripData,
   DesktopBannerContainerData,
   DesktopBannerLightData,
@@ -21,33 +20,44 @@ import {
 } from 'modules/banners/dialogs';
 
 type BannerPreviewProp = {
-  bannerData?: DesktopBannerLightData
+  bannerData?: DesktopBannerLightData,
+  disableClick?: boolean
 }
 
 const BannerPreview: React.FC<BannerPreviewProp> = (props) => {
-  const desktopBannerContext: DesktopBannerContextData | null = useDesktopBannerContext();
+  const desktopBannerContext = useDesktopBannerContext();
   const dialogContext = useDialogContext();
 
   const onBannerContainerClick = useCallback(() => {
+    if(props.disableClick) return;
+
     dialogContext?.setDialog(<ContainerDialog />);
   }, [dialogContext]);
 
   const onBannerStripClick = useCallback((event) => {
+    if(props.disableClick) return;
+
     event.stopPropagation();
     dialogContext?.setDialog(<StripDialog />);
   }, [dialogContext]);
 
   const onBannerTitleClick = useCallback((event) => {
+    if(props.disableClick) return;
+
     event.stopPropagation();
     dialogContext?.setDialog(<TitleDialog />);
   }, [dialogContext]);
 
   const onBannerSubtitleClick = useCallback((event) => {
+    if(props.disableClick) return;
+
     event.stopPropagation();
     dialogContext?.setDialog(<SubtitleDialog />);
   }, [dialogContext]);
 
   const onBannerButtonClick = useCallback((event) => {
+    if(props.disableClick) return;
+
     event.stopPropagation();
     dialogContext?.setDialog(<ButtonDialog />);
   }, [dialogContext]);
@@ -56,7 +66,6 @@ const BannerPreview: React.FC<BannerPreviewProp> = (props) => {
   if(!bannerData) return null;
   if(props.bannerData) bannerData = { ...bannerData, ...props.bannerData };
 
-  console.log(bannerData);
   return (
     <Container {...bannerData.container} onClick={onBannerContainerClick}>
       {bannerData.strip && <Strip {...bannerData.strip} onClick={onBannerStripClick}>{bannerData.strip.text}</Strip>}
@@ -124,7 +133,7 @@ const Button = styled.div<DesktopBannerButtonData>`
   background-color: ${({backgroundColor}) => backgroundColor || "#000"};
   color: ${({fontColor}) => fontColor || "#FFF"};
   border-radius: 30px;
-  font-size: 1.1em;
+  font-size: 1.3em;
   font-weight: bold;
   box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
 `;

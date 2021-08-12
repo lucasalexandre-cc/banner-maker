@@ -13,7 +13,6 @@ type BannerData = {
 };
 
 const Banner: React.FC<BannerData> = ({ data }) => {
-  console.log(data);
   const onEditClick = useCallback(() => {
     // TO-DO redirect to edit page
     console.log("Click on edit");

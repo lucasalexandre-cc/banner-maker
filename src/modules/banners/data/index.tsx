@@ -33,10 +33,6 @@ const desktopBannerElements = [
     id: 'subtitle',
     cta: 'Adicionar uma frase secundária',
     defaultData: {
-      title: {
-        text: 'Frase principal',
-        fontColor: '#000'
-      },
       subtitle: {
         text: 'Frase secundária',
         fontColor: '#ca12b2',

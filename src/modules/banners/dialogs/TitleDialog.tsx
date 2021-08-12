@@ -55,7 +55,7 @@ const TitleDialog: React.FC = () => {
         />
 
         <ColorInputPicker 
-          label="Cor do texto da faixa"
+          label="Cor do texto da frase"
           color={title.fontColor}
           onChange={newColor => onUpdateInput('fontColor', newColor)}
         />
