@@ -2,10 +2,10 @@ import React, { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 
 import { useDialogContext } from 'modules/shared/providers/DialogProvider';
-import { useDesktopBannerContext } from 'modules/banners/providers/DesktopBannerProvider';
+import { useDesktopBannerContext } from 'modules/desktop-banners/providers/DesktopBannerProvider';
 import { DefaultDialogContainer } from 'modules/shared/components';
-import { BannerPreview } from 'modules/banners/components';
-import { desktopBannerElements } from 'modules/banners/data';
+import { BannerPreview } from 'modules/desktop-banners/components';
+import { desktopBannerElements } from 'modules/desktop-banners/data';
 
 const AddElementDialog: React.FC = () => {
   const dialogContext = useDialogContext();

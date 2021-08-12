@@ -2,7 +2,7 @@ import React, { useState, useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 import { TextField, RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
 
-import { useDesktopBannerContext } from 'modules/banners/providers/DesktopBannerProvider';
+import { useDesktopBannerContext } from 'modules/desktop-banners/providers/DesktopBannerProvider';
 import { useDialogContext } from 'modules/shared/providers/DialogProvider';
 import { DefaultDialogContainer } from 'modules/shared/components';
 import { ColorInputPicker } from 'modules/shared/components';

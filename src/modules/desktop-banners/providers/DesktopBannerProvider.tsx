@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useCallback } from 'react';
 
 import { colors } from 'modules/shared/styles';
 
-import type { DesktopBannerContextData, DesktopBannerData } from 'modules/banners/types';
+import type { DesktopBannerContextData, DesktopBannerData } from 'modules/desktop-banners/types';
 import type { ProviderPropsData } from 'modules/shared/types';
 
 type ContextValue = DesktopBannerContextData | null;

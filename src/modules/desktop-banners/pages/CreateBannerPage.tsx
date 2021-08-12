@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 import { BaseDialog } from 'modules/shared/dialogs';
 import { shadows } from 'modules/shared/styles';
-import { BannerPreview, AddElementToBannerButton } from 'modules/banners/components';
-import { AddElementDialog } from 'modules/banners/dialogs';
-import { DesktopBannerProvider } from 'modules/banners/providers';
+import { BannerPreview, AddElementToBannerButton } from 'modules/desktop-banners/components';
+import { AddElementDialog } from 'modules/desktop-banners/dialogs';
+import { DesktopBannerProvider } from 'modules/desktop-banners/providers';
 import { useDialogContext } from 'modules/shared/providers/DialogProvider';
 
 const CreateBannerPage: React.FC = () => {

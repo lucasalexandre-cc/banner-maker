@@ -2,84 +2,76 @@ import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 
-import { useDesktopBannerContext } from 'modules/banners/providers/DesktopBannerProvider';
+import { useDesktopBannerContext } from 'modules/desktop-banners/providers/DesktopBannerProvider';
 import { useDialogContext } from 'modules/shared/providers/DialogProvider';
 import { DefaultDialogContainer } from 'modules/shared/components';
 import { ColorInputPicker } from 'modules/shared/components';
 
-const ButtonDialog: React.FC = () => {
+const TitleDialog: React.FC = () => {
   const desktopBannerContext = useDesktopBannerContext();
-  const [button, setButton] = useState(desktopBannerContext?.bannerData?.button || DEFAULT_BUTTON_DATA);
+  const [title, setTitle] = useState(desktopBannerContext?.bannerData?.title || DEFAULT_TITLE_DATA);
   const dialogContext = useDialogContext();
 
   const onUpdateInput = useCallback((key, value) => {
-    setButton({ ...button, [key]: value });
-  }, [button, setButton]);
+    setTitle({ ...title, [key]: value });
+  }, [title, setTitle]);
 
-  const validateButtonData = useCallback(() => {
-    if(!button.text) return false;
-    if(!button.fontColor || button.fontColor[0] !== '#') return false;
-    if(!button.backgroundColor || button.backgroundColor[0] !== '#') return false;
+  const validateTitleData = useCallback(() => {
+    if(!title.text) return false;
+    if(!title.fontColor || title.fontColor[0] !== '#') return false;
 
     return true;
-  }, [button]);
+  }, [title]);
 
   const showDeleteButton = useCallback(() => {
-    return !!desktopBannerContext?.bannerData?.button;
+    return !!desktopBannerContext?.bannerData?.title;
   }, [desktopBannerContext]);
 
-  const onSaveButton = useCallback(() => {
-    if(!validateButtonData()) {
+  const onSaveTitle = useCallback(() => {
+    if(!validateTitleData()) {
       alert("Form inválido");
       return;
     }
 
-    desktopBannerContext?.updateBannerData('button', button);
+    desktopBannerContext?.updateBannerData('title', title);
     dialogContext?.unsetDialog();
-  }, [validateButtonData, desktopBannerContext, button, dialogContext]);
+  }, [validateTitleData, desktopBannerContext, title, dialogContext]);
 
-  const onDeleteButton = useCallback(() => {
-    desktopBannerContext?.deleteData('button');
+  const onDeleteTitle = useCallback(() => {
+    desktopBannerContext?.deleteData('title');
     dialogContext?.unsetDialog();
   }, [desktopBannerContext, dialogContext]);
 
   return (
     <DefaultDialogContainer>
-      <Title>Crie sua faixa</Title>
+      <Title>Adicionar uma frase principal</Title>
       <Form>
         <CustomInput
           required
-          label="Texto do Botão"
-          value={button.text}
+          label="Texto da frase"
+          value={title.text}
           onChange={event => onUpdateInput('text', event.target.value)}
           variant="outlined"
         />
 
         <ColorInputPicker 
-          label="Cor do texto do botão"
-          color={button.fontColor}
+          label="Cor do texto da frase"
+          color={title.fontColor}
           onChange={newColor => onUpdateInput('fontColor', newColor)}
         />
 
-        <ColorInputPicker 
-          label="Cor do fundo do botão"
-          color={button.backgroundColor}
-          onChange={newColor => onUpdateInput('backgroundColor', newColor)}
-        />
-
-        <CustomButton onClick={onSaveButton}>Salvar</CustomButton>
+        <CustomButton onClick={onSaveTitle}>Salvar</CustomButton>
         {showDeleteButton() && 
-          <CustomButton onClick={onDeleteButton}>Deletar</CustomButton>
+          <CustomButton onClick={onDeleteTitle}>Deletar</CustomButton>
         }
       </Form>
     </DefaultDialogContainer>
   );
 }
 
-const DEFAULT_BUTTON_DATA = {
+const DEFAULT_TITLE_DATA = {
   text: '',
-  fontColor: '#000',
-  backgroundColor: '#FF00DC'
+  fontColor: '#000'
 };
 
 const Title = styled.h1`
@@ -110,4 +102,4 @@ const CustomButton = styled.button`
   color: #FFF;
 `;
 
-export default ButtonDialog;
+export default TitleDialog;

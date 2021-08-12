@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 
-import { useDesktopBannerContext } from 'modules/banners/providers/DesktopBannerProvider';
+import { useDesktopBannerContext } from 'modules/desktop-banners/providers/DesktopBannerProvider';
 import { useDialogContext } from 'modules/shared/providers/DialogProvider';
 import type { 
   DesktopBannerStripData,
@@ -10,14 +10,14 @@ import type {
   DesktopBannerTitleData,
   DesktopBannerSubtitleData,
   DesktopBannerButtonData
-} from 'modules/banners/types';
+} from 'modules/desktop-banners/types';
 import { 
   StripDialog, 
   ContainerDialog, 
   TitleDialog, 
   SubtitleDialog,
   ButtonDialog
-} from 'modules/banners/dialogs';
+} from 'modules/desktop-banners/dialogs';
 
 type BannerPreviewProp = {
   bannerData?: DesktopBannerLightData,

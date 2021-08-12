@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
 
 import { shadows, } from 'modules/shared/styles';
-import { Banner, AddBannerButton } from 'modules/banners/components';
+import { Banner, AddBannerButton } from 'modules/desktop-banners/components';
 import { banners } from 'fake-data';
 
 const BannersListPage: React.FC = () => {
   const history = useHistory();
 
   const onClickCreateBanner = useCallback(() => {
-    history.push('/create');
+    history.push('create');
   }, [history]);
 
   return (

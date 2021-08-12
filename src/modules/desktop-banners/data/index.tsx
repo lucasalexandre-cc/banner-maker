@@ -3,7 +3,7 @@ import {
   TitleDialog, 
   SubtitleDialog, 
   ButtonDialog 
-} from 'modules/banners/dialogs';
+} from 'modules/desktop-banners/dialogs';
 
 const desktopBannerElements = [
   {
