@@ -3,7 +3,13 @@ import styled from 'styled-components';
 
 import { BaseDialog } from 'modules/shared/dialogs';
 import { shadows } from 'modules/shared/styles';
-import { BannerPreview, AddElementToBannerButton, BannerPublicPreview, UpdateBannerPublicButton } from 'modules/desktop-banners/components';
+import { 
+  BannerPreview, 
+  AddElementToBannerButton, 
+  BannerPublicPreview, 
+  UpdateBannerPublicButton,
+  BannerInternalInfoForm
+} from 'modules/desktop-banners/components';
 import { AddElementDialog, EditBannerPublicDialog } from 'modules/desktop-banners/dialogs';
 import { DesktopBannerProvider } from 'modules/desktop-banners/providers';
 import { useDialogContext } from 'modules/shared/providers/DialogProvider';
@@ -22,6 +28,9 @@ const CreateBannerPage: React.FC = () => {
   return (
     <DesktopBannerProvider>
       <Container>
+        <Title>Informações do banner</Title>
+        <BannerInternalInfoForm />
+
         <Title>Layout do banner</Title>
         <BannerPreview />
         <AddElementToBannerButton onClick={openAddElementDialog} />

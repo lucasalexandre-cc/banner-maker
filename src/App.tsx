@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import ptBr from 'date-fns/locale/pt-BR';
+import { registerLocale } from "react-datepicker";
 
 import { Header } from 'modules/shared/components';
 import { LoggedRouter } from 'modules/shared/routes';
 import RootProviders from 'modules/shared/providers/RootProviders';
 
 const App: React.FC = () => {
+
+  useEffect(() => {
+    registerLocale('pt-br', ptBr);
+  }, []);
 
   const userLogged = true;
   return (

@@ -43,7 +43,10 @@ const INITIAL_BANNER_DATA = {
     universities: {
       type: 'all'
     }
-  }
+  },
+  name: '',
+  initialDate: new Date(),
+  endDate: new Date(),
 } as DesktopBannerData;
 
 export default DesktopBannerProvider;

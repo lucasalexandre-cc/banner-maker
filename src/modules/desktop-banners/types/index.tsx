@@ -40,6 +40,9 @@ type DesktopBannerData = {
   subtitle?: DesktopBannerSubtitleData,
   button?: DesktopBannerButtonData,
   public: BannerPublicData,
+  name?: string,
+  initialDate?: Date,
+  endDate?: Date,
 };
 
 type DesktopBannerLightData = {
