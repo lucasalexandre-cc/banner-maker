@@ -10,7 +10,7 @@ const BannersListPage: React.FC = () => {
   const history = useHistory();
 
   const onClickCreateBanner = useCallback(() => {
-    history.push('create');
+    history.push('/desktop-banner/create');
   }, [history]);
 
   return (

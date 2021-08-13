@@ -4,6 +4,7 @@ import ContainerDialog from './ContainerDialog';
 import TitleDialog from './TitleDialog';
 import SubtitleDialog from './SubtitleDialog';
 import ButtonDialog from './ButtonDialog';
+import EditBannerPublicDialog from './EditBannerPublicDialog';
 
 export { 
   AddElementDialog, 
@@ -11,5 +12,6 @@ export {
   ContainerDialog, 
   TitleDialog, 
   SubtitleDialog,
-  ButtonDialog
+  ButtonDialog,
+  EditBannerPublicDialog
 };

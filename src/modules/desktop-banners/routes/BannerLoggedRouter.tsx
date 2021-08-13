@@ -1,6 +1,6 @@
 import React from 'react';
-
 import { Route, useRouteMatch } from 'react-router-dom';
+
 import { BannersListPage, CreateBannerPage } from 'modules/desktop-banners/pages';
 
 const DesktopBannerLoggedRouter: React.FC = () => {

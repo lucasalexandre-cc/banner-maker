@@ -1,3 +1,7 @@
+import type { 
+  BannerPublicData
+} from 'modules/shared/types';
+
 type DesktopBannerContainerData = {
   backgroundType: string,
   backgroundColor?: string,
@@ -34,14 +38,16 @@ type DesktopBannerData = {
   strip?: DesktopBannerStripData,
   title?: DesktopBannerTitleData,
   subtitle?: DesktopBannerSubtitleData,
-  button?: DesktopBannerButtonData
+  button?: DesktopBannerButtonData,
+  public: BannerPublicData,
 };
 
 type DesktopBannerLightData = {
   container?: DesktopBannerContainerData,
   strip?: DesktopBannerStripData,
   title?: DesktopBannerTitleData,
-  subtitle?: DesktopBannerSubtitleData
+  subtitle?: DesktopBannerSubtitleData,
+  button?: DesktopBannerButtonData
 };
 
 // to-do remove any

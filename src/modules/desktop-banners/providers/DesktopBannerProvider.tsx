@@ -36,6 +36,14 @@ const INITIAL_BANNER_DATA = {
     backgroundType: 'normal',
     backgroundColor: colors.defaultBannerBackgroundColor
   },
+  public: {
+    userAccess: {
+      type: 'all'
+    },
+    universities: {
+      type: 'all'
+    }
+  }
 } as DesktopBannerData;
 
 export default DesktopBannerProvider;

@@ -1,13 +1,17 @@
 import React from 'react';
-import DialogProvider from './DialogProvider';
+import { ApolloProvider, } from "@apollo/client";
 
+import { RailsApi } from 'modules/shared/apis';
+import DialogProvider from './DialogProvider';
 import type { ProviderPropsData } from 'modules/shared/types';
 
 const RootProviders: React.FC<ProviderPropsData> = ({ children }) => {
   return (
-    <DialogProvider>
-      {children}
-    </DialogProvider>
+    <ApolloProvider client={RailsApi}>
+      <DialogProvider>
+        {children}
+      </DialogProvider>
+    </ApolloProvider>
   )
 }
 

@@ -2,4 +2,19 @@ type ProviderPropsData = {
   children: React.ReactNode
 }
 
-export type { ProviderPropsData };
+type UniversitiesData = {
+  type: string,
+  ids?: Array<number>
+}
+
+type UserAccessData = {
+  type: string,
+  trialReason?: string,
+}
+
+type BannerPublicData = {
+  universities: UniversitiesData,
+  userAccess: UserAccessData
+}
+
+export type { ProviderPropsData, BannerPublicData, };

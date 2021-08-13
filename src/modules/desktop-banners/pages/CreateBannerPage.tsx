@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 import { BaseDialog } from 'modules/shared/dialogs';
 import { shadows } from 'modules/shared/styles';
-import { BannerPreview, AddElementToBannerButton } from 'modules/desktop-banners/components';
-import { AddElementDialog } from 'modules/desktop-banners/dialogs';
+import { BannerPreview, AddElementToBannerButton, BannerPublicPreview, UpdateBannerPublicButton } from 'modules/desktop-banners/components';
+import { AddElementDialog, EditBannerPublicDialog } from 'modules/desktop-banners/dialogs';
 import { DesktopBannerProvider } from 'modules/desktop-banners/providers';
 import { useDialogContext } from 'modules/shared/providers/DialogProvider';
 
@@ -15,12 +15,20 @@ const CreateBannerPage: React.FC = () => {
     dialogContext?.setDialog(<AddElementDialog />)
   }, [dialogContext]);
 
+  const openEditBannerPublicDialog = useCallback(() => {
+    dialogContext?.setDialog(<EditBannerPublicDialog />)
+  }, [dialogContext]);
+
   return (
     <DesktopBannerProvider>
       <Container>
-        <Title>Insira as informações do seu banner</Title>
+        <Title>Layout do banner</Title>
         <BannerPreview />
         <AddElementToBannerButton onClick={openAddElementDialog} />
+
+        <Title marginTop="40px">Publico do banner</Title>
+        <BannerPublicPreview />
+        <UpdateBannerPublicButton onClick={openEditBannerPublicDialog} />
       </Container>
       <BaseDialog />
     </DesktopBannerProvider>
@@ -37,12 +45,17 @@ const Container = styled.div`
   ${shadows.cardShadow};
 `;
 
-const Title = styled.h1`
+type TitleData = {
+  marginTop?: string;
+}
+
+const Title = styled.h1<TitleData>`
   width: 100%;
   text-align: center;
   font-size: 1.5em;
   font-weight: bold;
   margin-bottom: 40px;
+  ${({ marginTop }) => marginTop && `margin-top: ${marginTop};`}
 `;
 
 export default CreateBannerPage;
