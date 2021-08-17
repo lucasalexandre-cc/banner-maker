@@ -32,35 +32,35 @@ const BannerPreview: React.FC<BannerPreviewProp> = (props) => {
     if(props.disableClick) return;
 
     dialogContext?.setDialog(<ContainerDialog />);
-  }, [dialogContext]);
+  }, [dialogContext, props.disableClick]);
 
   const onBannerStripClick = useCallback((event) => {
     if(props.disableClick) return;
 
     event.stopPropagation();
     dialogContext?.setDialog(<StripDialog />);
-  }, [dialogContext]);
+  }, [dialogContext, props.disableClick]);
 
   const onBannerTitleClick = useCallback((event) => {
     if(props.disableClick) return;
 
     event.stopPropagation();
     dialogContext?.setDialog(<TitleDialog />);
-  }, [dialogContext]);
+  }, [dialogContext, props.disableClick]);
 
   const onBannerSubtitleClick = useCallback((event) => {
     if(props.disableClick) return;
 
     event.stopPropagation();
     dialogContext?.setDialog(<SubtitleDialog />);
-  }, [dialogContext]);
+  }, [dialogContext, props.disableClick]);
 
   const onBannerButtonClick = useCallback((event) => {
     if(props.disableClick) return;
 
     event.stopPropagation();
     dialogContext?.setDialog(<ButtonDialog />);
-  }, [dialogContext]);
+  }, [dialogContext, props.disableClick]);
 
   let bannerData = desktopBannerContext?.bannerData;
   if(!bannerData) return null;

@@ -53,11 +53,18 @@ type DesktopBannerLightData = {
   button?: DesktopBannerButtonData
 };
 
+type CreateBannerResponseData = {
+  success: boolean,
+  errorMessage?: string,
+  successMessage?:string
+};
+
 // to-do remove any
 type DesktopBannerContextData = {
   bannerData: DesktopBannerData,
   updateBannerData: (key: string, value: any) => void,
-  deleteData: (key: any) => void
+  deleteData: (key: any) => void,
+  createBanner: () => Promise<CreateBannerResponseData | undefined>
 }
 
 export type {
@@ -66,7 +73,9 @@ export type {
   DesktopBannerTitleData,
   DesktopBannerSubtitleData,
   DesktopBannerButtonData,
+  BannerPublicData,
   DesktopBannerData,
   DesktopBannerLightData,
-  DesktopBannerContextData
+  DesktopBannerContextData,
+  CreateBannerResponseData,
 };

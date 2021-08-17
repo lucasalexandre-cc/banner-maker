@@ -8,7 +8,8 @@ import {
   AddElementToBannerButton, 
   BannerPublicPreview, 
   UpdateBannerPublicButton,
-  BannerInternalInfoForm
+  BannerInternalInfoForm,
+  CreateBannerButton
 } from 'modules/desktop-banners/components';
 import { AddElementDialog, EditBannerPublicDialog } from 'modules/desktop-banners/dialogs';
 import { DesktopBannerProvider } from 'modules/desktop-banners/providers';
@@ -38,6 +39,8 @@ const CreateBannerPage: React.FC = () => {
         <Title marginTop="40px">Publico do banner</Title>
         <BannerPublicPreview />
         <UpdateBannerPublicButton onClick={openEditBannerPublicDialog} />
+
+        <CreateBannerButton />
       </Container>
       <BaseDialog />
     </DesktopBannerProvider>

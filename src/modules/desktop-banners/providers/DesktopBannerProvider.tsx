@@ -1,8 +1,10 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
+import { useMutation } from '@apollo/client';
 
 import { colors } from 'modules/shared/styles';
-
-import type { DesktopBannerContextData, DesktopBannerData } from 'modules/desktop-banners/types';
+import { CREATE_DESKTOP_BANNER } from 'modules/desktop-banners/queries/desktop-banner-queries';
+import { useValidate } from 'modules/desktop-banners/hooks';
+import type { DesktopBannerContextData, DesktopBannerData, CreateBannerResponseData } from 'modules/desktop-banners/types';
 import type { ProviderPropsData } from 'modules/shared/types';
 
 type ContextValue = DesktopBannerContextData | null;
@@ -11,6 +13,8 @@ export const DesktopBannerContext = createContext<ContextValue>(null);
 
 const DesktopBannerProvider: React.FC<ProviderPropsData> = (props) => {
   const [bannerData, setBannerData] = useState(INITIAL_BANNER_DATA);
+  const [createBannerReq] = useMutation<{createDesktopBanner: CreateBannerResponseData}>(CREATE_DESKTOP_BANNER);
+  const { validateBannerData } = useValidate();
 
   const updateBannerData = useCallback((key, value) => {
     setBannerData({ ...bannerData, [key]: value });
@@ -22,8 +26,23 @@ const DesktopBannerProvider: React.FC<ProviderPropsData> = (props) => {
     setBannerData(newBannerData);
   }, [bannerData, setBannerData]);
 
+  const createBanner = useCallback(async () => {
+    const errors = validateBannerData(bannerData);
+    if(errors.length > 0) {
+      alert(errors.join('.\n'));
+      return;
+    }
+    const response = await createBannerReq({ variables: { bannerData: bannerData, bannerType: 'desktop' }, });
+    return response.data?.createDesktopBanner;
+  }, [bannerData, createBannerReq, validateBannerData]);
+
   return (
-    <DesktopBannerContext.Provider value={{bannerData, updateBannerData, deleteData}}>
+    <DesktopBannerContext.Provider value={{
+      bannerData, 
+      updateBannerData, 
+      deleteData, 
+      createBanner
+    }}>
       {props.children}
     </DesktopBannerContext.Provider>
   )
@@ -38,10 +57,10 @@ const INITIAL_BANNER_DATA = {
   },
   public: {
     userAccess: {
-      type: 'all'
+      type: 'all_users'
     },
     universities: {
-      type: 'all'
+      type: 'all_universities'
     }
   },
   name: '',
