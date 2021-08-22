@@ -4,17 +4,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 type UpdateBannerPublicParams = {
-  onClick: () => void,
-}
+  onClick: () => void;
+};
 
-const UpdateBannerPublicButton: React.FC<UpdateBannerPublicParams> = ({ onClick }) => {
+const UpdateBannerPublicButton: React.FC<UpdateBannerPublicParams> = ({
+  onClick
+}) => {
   return (
     <Container onClick={onClick}>
       <CustonIcon icon={faEdit} />
       <Text>Editar público</Text>
     </Container>
   );
-}
+};
 
 const Container = styled.div`
   display: flex;
@@ -24,8 +26,7 @@ const Container = styled.div`
   cursor: pointer;
 `;
 
-const CustonIcon = styled(FontAwesomeIcon)`
-`;
+const CustonIcon = styled(FontAwesomeIcon)``;
 
 const Text = styled.div`
   margin-left: 8px;

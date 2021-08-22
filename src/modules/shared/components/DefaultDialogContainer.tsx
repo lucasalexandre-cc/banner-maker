@@ -4,15 +4,18 @@ import styled from 'styled-components';
 import { useDialogContext } from 'modules/shared/providers/DialogProvider';
 
 type CustomDialogContainerData = {
-  maxWidth?: string
-}
+  maxWidth?: string;
+};
 
 type DialogContainerProps = {
-  children: React.ReactNode,
-  data?: CustomDialogContainerData
-}
+  children: React.ReactNode;
+  data?: CustomDialogContainerData;
+};
 
-const DefaultDialogContainer: React.FC<DialogContainerProps> = ({ children, data }) => {
+const DefaultDialogContainer: React.FC<DialogContainerProps> = ({
+  children,
+  data
+}) => {
   const dialogContext = useDialogContext();
 
   const onCloseDialog = useCallback(() => {
@@ -27,7 +30,7 @@ const DefaultDialogContainer: React.FC<DialogContainerProps> = ({ children, data
       </Content>
     </Container>
   );
-}
+};
 
 const Container = styled.div`
   width: 100%;
@@ -43,12 +46,12 @@ const Content = styled.div<CustomDialogContainerData>`
   flex-direction: column;
   align-items: center;
   width: 95%;
-  max-width: ${({ maxWidth }) => maxWidth || '1080px' };
+  max-width: ${({ maxWidth }) => maxWidth || '1080px'};
   background: #fff;
   border-radius: 5px;
   padding: 30px 15px 20px;
-  background-color: #FFF;
-  box-shadow: 1px 1px 6px rgba(0,0,0,.4);
+  background-color: #fff;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
 `;
 
 const CloseDialog = styled.div`
@@ -61,7 +64,3 @@ const CloseDialog = styled.div`
 `;
 
 export default DefaultDialogContainer;
-
-
-
-

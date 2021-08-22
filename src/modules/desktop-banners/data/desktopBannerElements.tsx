@@ -1,8 +1,9 @@
-import { 
-  StripDialog, 
-  TitleDialog, 
-  SubtitleDialog, 
-  ButtonDialog 
+import React from 'react';
+import {
+  StripDialog,
+  TitleDialog,
+  SubtitleDialog,
+  ButtonDialog
 } from 'modules/desktop-banners/dialogs';
 
 const desktopBannerElements = [
@@ -16,7 +17,7 @@ const desktopBannerElements = [
         backgroundColor: '#ca12b2'
       }
     },
-    getDialog: () => <StripDialog />,
+    getDialog: () => <StripDialog />
   },
   {
     id: 'title',
@@ -25,9 +26,9 @@ const desktopBannerElements = [
       title: {
         text: 'Frase principal',
         fontColor: '#ca12b2'
-      },
+      }
     },
-    getDialog: () => <TitleDialog />,
+    getDialog: () => <TitleDialog />
   },
   {
     id: 'subtitle',
@@ -39,7 +40,7 @@ const desktopBannerElements = [
         size: 'normal'
       }
     },
-    getDialog: () => <SubtitleDialog />,
+    getDialog: () => <SubtitleDialog />
   },
   {
     id: 'button',
@@ -48,11 +49,11 @@ const desktopBannerElements = [
       button: {
         text: 'Frase do botao',
         fontColor: '#FFF',
-        backgroundColor: '#ca12b2',
+        backgroundColor: '#ca12b2'
       }
     },
-    getDialog: () => <ButtonDialog />,
-  },
+    getDialog: () => <ButtonDialog />
+  }
 ];
 
 export default desktopBannerElements;

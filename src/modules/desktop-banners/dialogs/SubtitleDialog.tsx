@@ -1,25 +1,37 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import styled from 'styled-components';
-import { TextField, RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
+import {
+  TextField,
+  RadioGroup,
+  FormControlLabel,
+  Radio
+} from '@material-ui/core';
 
 import { useDesktopBannerContext } from 'modules/desktop-banners/providers/DesktopBannerProvider';
 import { useDialogContext } from 'modules/shared/providers/DialogProvider';
-import { DefaultDialogContainer } from 'modules/shared/components';
-import { ColorInputPicker } from 'modules/shared/components';
+import {
+  DefaultDialogContainer,
+  ColorInputPicker
+} from 'modules/shared/components';
 
 const SubtitleDialog: React.FC = () => {
   const desktopBannerContext = useDesktopBannerContext();
-  const [subtitle, setSubtitle] = useState(desktopBannerContext?.bannerData?.subtitle || DEFAULT_SUBTITLE_DATA);
+  const [subtitle, setSubtitle] = useState(
+    desktopBannerContext?.bannerData?.subtitle || DEFAULT_SUBTITLE_DATA
+  );
   const dialogContext = useDialogContext();
 
-  const onUpdateInput = useCallback((key, value) => {
-    setSubtitle({ ...subtitle, [key]: value });
-  }, [subtitle, setSubtitle]);
+  const onUpdateInput = useCallback(
+    (key, value) => {
+      setSubtitle({ ...subtitle, [key]: value });
+    },
+    [subtitle, setSubtitle]
+  );
 
   const validateSubtitleData = useCallback(() => {
-    if(!subtitle.text) return false;
-    if(!subtitle.size) return false;
-    if(!subtitle.fontColor || subtitle.fontColor[0] !== '#') return false;
+    if (!subtitle.text) return false;
+    if (!subtitle.size) return false;
+    if (!subtitle.fontColor || subtitle.fontColor[0] !== '#') return false;
 
     return true;
   }, [subtitle]);
@@ -29,8 +41,8 @@ const SubtitleDialog: React.FC = () => {
   }, [desktopBannerContext]);
 
   const onSaveSubtitle = useCallback(() => {
-    if(!validateSubtitleData()) {
-      alert("Form inválido");
+    if (!validateSubtitleData()) {
+      alert('Form inválido');
       return;
     }
 
@@ -44,7 +56,10 @@ const SubtitleDialog: React.FC = () => {
   }, [desktopBannerContext, dialogContext]);
 
   const sizeTypes = useMemo(() => {
-    return [{name: 'Normal', value: 'normal'}, {name: 'Grande', value: 'big'}];
+    return [
+      { name: 'Normal', value: 'normal' },
+      { name: 'Grande', value: 'big' }
+    ];
   }, []);
 
   return (
@@ -55,31 +70,39 @@ const SubtitleDialog: React.FC = () => {
           required
           label="Texto da frase"
           value={subtitle.text}
-          onChange={event => onUpdateInput('text', event.target.value)}
+          onChange={(event) => onUpdateInput('text', event.target.value)}
           variant="outlined"
         />
 
-        <ColorInputPicker 
+        <ColorInputPicker
           label="Cor do texto da faixa"
           color={subtitle.fontColor}
-          onChange={newColor => onUpdateInput('fontColor', newColor)}
+          onChange={(newColor) => onUpdateInput('fontColor', newColor)}
         />
 
         <CustomLabel>Tamanho do texto secundário</CustomLabel>
-        <RadioGroup value={subtitle.size} onChange={(event) => onUpdateInput('size', event.target.value)}>        
-          {sizeTypes.map(sizeType => (
-            <FormControlLabel key={sizeType.value} value={sizeType.value} control={<Radio />} label={sizeType.name} />
+        <RadioGroup
+          value={subtitle.size}
+          onChange={(event) => onUpdateInput('size', event.target.value)}
+        >
+          {sizeTypes.map((sizeType) => (
+            <FormControlLabel
+              key={sizeType.value}
+              value={sizeType.value}
+              control={<Radio />}
+              label={sizeType.name}
+            />
           ))}
         </RadioGroup>
 
         <CustomButton onClick={onSaveSubtitle}>Salvar</CustomButton>
-        {showDeleteButton() && 
+        {showDeleteButton() && (
           <CustomButton onClick={onDeleteSubtitle}>Deletar</CustomButton>
-        }
+        )}
       </Form>
     </DefaultDialogContainer>
   );
-}
+};
 
 const DEFAULT_SUBTITLE_DATA = {
   text: '',
@@ -112,7 +135,7 @@ const CustomButton = styled.button`
   margin: 10px 0;
   padding: 10px 20px;
   background-color: #000;
-  color: #FFF;
+  color: #fff;
 `;
 
 const CustomLabel = styled.h1`

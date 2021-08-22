@@ -12,7 +12,7 @@ const style: ReactModal.Styles = {
     left: '0',
     border: 'none',
     background: 'transparent',
-    padding: 0,
+    padding: 0
   },
   overlay: {
     display: 'flex',
@@ -25,10 +25,9 @@ const style: ReactModal.Styles = {
     height: '100vh',
     background: 'rgba(255, 255, 255, 0.9)',
     textAlign: 'center',
-    zIndex: 100,
-  },
+    zIndex: 100
+  }
 };
-
 
 const BaseDialog: React.FC = () => {
   const dialogContext = useDialogContext();
@@ -39,6 +38,6 @@ const BaseDialog: React.FC = () => {
       {dialog}
     </ReactModal>
   );
-}
+};
 
 export default BaseDialog;

@@ -13,6 +13,6 @@ const LoggedRouter: React.FC = () => {
       </Switch>
     </BrowserRouter>
   );
-}
+};
 
 export default LoggedRouter;

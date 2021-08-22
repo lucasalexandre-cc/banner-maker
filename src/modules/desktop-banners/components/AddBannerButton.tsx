@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 type AddBannerParams = {
-  onClick: () => void,
-}
+  onClick: () => void;
+};
 
 const AddBannerButton: React.FC<AddBannerParams> = ({ onClick }) => {
   return (
@@ -14,7 +14,7 @@ const AddBannerButton: React.FC<AddBannerParams> = ({ onClick }) => {
       <Text>Criar banner</Text>
     </Container>
   );
-}
+};
 
 const Container = styled.div`
   display: flex;
@@ -24,8 +24,7 @@ const Container = styled.div`
   cursor: pointer;
 `;
 
-const CustonIcon = styled(FontAwesomeIcon)`
-`;
+const CustonIcon = styled(FontAwesomeIcon)``;
 
 const Text = styled.div`
   margin-left: 8px;

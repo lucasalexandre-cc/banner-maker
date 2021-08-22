@@ -1,46 +1,52 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import { useHistory } from "react-router-dom";
-import { useQuery } from "@apollo/client";
+import { useHistory } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
 
-import { shadows, } from 'modules/shared/styles';
+import { shadows } from 'modules/shared/styles';
 import { Banner, AddBannerButton } from 'modules/desktop-banners/components';
 import { GET_DESKTOP_BANNERS } from 'modules/desktop-banners/queries/desktop-banner-queries';
 
 type BannerQueryType = {
-  id: number,
-  name: string
-}
+  id: number;
+  name: string;
+};
 
 const BannersListPage: React.FC = () => {
   const history = useHistory();
-  const { data: bannersResponse, error, loading } = useQuery<{bannerMakerGetBanners: Array<BannerQueryType>}>(GET_DESKTOP_BANNERS);
+  const {
+    data: bannersResponse,
+    error,
+    loading
+  } = useQuery<{ bannerMakerGetBanners: Array<BannerQueryType> }>(
+    GET_DESKTOP_BANNERS
+  );
 
   const onClickCreateBanner = useCallback(() => {
     history.push('/desktop-banner/create');
   }, [history]);
 
-  if(error || loading) return null;
+  if (error || loading) return null;
 
   const banners = bannersResponse?.bannerMakerGetBanners;
   return (
     <Container>
       <Title>Lista de banners</Title>
       <ListContainer>
-        {banners?.map(banner => (
+        {banners?.map((banner) => (
           <Banner key={banner.id} data={banner} />
         ))}
       </ListContainer>
       <AddBannerButton onClick={onClickCreateBanner} />
     </Container>
   );
-}
+};
 
 const Container = styled.div`
   width: 1080px;
   max-width: 95%;
   margin: 60px auto 30px auto;
-  background-color: #FFF;
+  background-color: #fff;
   padding: 30px;
   border-radius: 20px;
   ${shadows.cardShadow};

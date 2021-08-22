@@ -6,11 +6,11 @@ import SubtitleDialog from './SubtitleDialog';
 import ButtonDialog from './ButtonDialog';
 import EditBannerPublicDialog from './EditBannerPublicDialog';
 
-export { 
-  AddElementDialog, 
-  StripDialog, 
-  ContainerDialog, 
-  TitleDialog, 
+export {
+  AddElementDialog,
+  StripDialog,
+  ContainerDialog,
+  TitleDialog,
   SubtitleDialog,
   ButtonDialog,
   EditBannerPublicDialog

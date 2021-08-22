@@ -1,7 +1,10 @@
 import React from 'react';
 import { Route, useRouteMatch } from 'react-router-dom';
 
-import { BannersListPage, CreateBannerPage } from 'modules/desktop-banners/pages';
+import {
+  BannersListPage,
+  CreateBannerPage
+} from 'modules/desktop-banners/pages';
 
 const DesktopBannerLoggedRouter: React.FC = () => {
   const { url } = useRouteMatch();
@@ -12,6 +15,6 @@ const DesktopBannerLoggedRouter: React.FC = () => {
       <Route exact path={`${url}/create`} component={CreateBannerPage} />
     </>
   );
-}
+};
 
 export default DesktopBannerLoggedRouter;

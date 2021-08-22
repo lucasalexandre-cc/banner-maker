@@ -4,22 +4,30 @@ import TextField from '@material-ui/core/TextField';
 
 import { useDesktopBannerContext } from 'modules/desktop-banners/providers/DesktopBannerProvider';
 import { useDialogContext } from 'modules/shared/providers/DialogProvider';
-import { DefaultDialogContainer } from 'modules/shared/components';
-import { ColorInputPicker } from 'modules/shared/components';
+import {
+  DefaultDialogContainer,
+  ColorInputPicker
+} from 'modules/shared/components';
 
 const ButtonDialog: React.FC = () => {
   const desktopBannerContext = useDesktopBannerContext();
-  const [button, setButton] = useState(desktopBannerContext?.bannerData?.button || DEFAULT_BUTTON_DATA);
+  const [button, setButton] = useState(
+    desktopBannerContext?.bannerData?.button || DEFAULT_BUTTON_DATA
+  );
   const dialogContext = useDialogContext();
 
-  const onUpdateInput = useCallback((key, value) => {
-    setButton({ ...button, [key]: value });
-  }, [button, setButton]);
+  const onUpdateInput = useCallback(
+    (key, value) => {
+      setButton({ ...button, [key]: value });
+    },
+    [button, setButton]
+  );
 
   const validateButtonData = useCallback(() => {
-    if(!button.text) return false;
-    if(!button.fontColor || button.fontColor[0] !== '#') return false;
-    if(!button.backgroundColor || button.backgroundColor[0] !== '#') return false;
+    if (!button.text) return false;
+    if (!button.fontColor || button.fontColor[0] !== '#') return false;
+    if (!button.backgroundColor || button.backgroundColor[0] !== '#')
+      return false;
 
     return true;
   }, [button]);
@@ -29,8 +37,8 @@ const ButtonDialog: React.FC = () => {
   }, [desktopBannerContext]);
 
   const onSaveButton = useCallback(() => {
-    if(!validateButtonData()) {
-      alert("Form inválido");
+    if (!validateButtonData()) {
+      alert('Form inválido');
       return;
     }
 
@@ -51,30 +59,30 @@ const ButtonDialog: React.FC = () => {
           required
           label="Texto do Botão"
           value={button.text}
-          onChange={event => onUpdateInput('text', event.target.value)}
+          onChange={(event) => onUpdateInput('text', event.target.value)}
           variant="outlined"
         />
 
-        <ColorInputPicker 
+        <ColorInputPicker
           label="Cor do texto do botão"
           color={button.fontColor}
-          onChange={newColor => onUpdateInput('fontColor', newColor)}
+          onChange={(newColor) => onUpdateInput('fontColor', newColor)}
         />
 
-        <ColorInputPicker 
+        <ColorInputPicker
           label="Cor do fundo do botão"
           color={button.backgroundColor}
-          onChange={newColor => onUpdateInput('backgroundColor', newColor)}
+          onChange={(newColor) => onUpdateInput('backgroundColor', newColor)}
         />
 
         <CustomButton onClick={onSaveButton}>Salvar</CustomButton>
-        {showDeleteButton() && 
+        {showDeleteButton() && (
           <CustomButton onClick={onDeleteButton}>Deletar</CustomButton>
-        }
+        )}
       </Form>
     </DefaultDialogContainer>
   );
-}
+};
 
 const DEFAULT_BUTTON_DATA = {
   text: '',
@@ -107,7 +115,7 @@ const CustomButton = styled.button`
   margin: 10px 0;
   padding: 10px 20px;
   background-color: #000;
-  color: #FFF;
+  color: #fff;
 `;
 
 export default ButtonDialog;

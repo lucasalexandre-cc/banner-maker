@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { useDesktopBannerContext } from 'modules/desktop-banners/providers/DesktopBannerProvider';
 import { useDialogContext } from 'modules/shared/providers/DialogProvider';
-import type { 
+import type {
   DesktopBannerStripData,
   DesktopBannerContainerData,
   DesktopBannerLightData,
@@ -11,72 +11,103 @@ import type {
   DesktopBannerSubtitleData,
   DesktopBannerButtonData
 } from 'modules/desktop-banners/types';
-import { 
-  StripDialog, 
-  ContainerDialog, 
-  TitleDialog, 
+import {
+  StripDialog,
+  ContainerDialog,
+  TitleDialog,
   SubtitleDialog,
   ButtonDialog
 } from 'modules/desktop-banners/dialogs';
 
 type BannerPreviewProp = {
-  bannerData?: DesktopBannerLightData,
-  disableClick?: boolean
-}
+  bannerData?: DesktopBannerLightData;
+  disableClick?: boolean;
+};
 
-const BannerPreview: React.FC<BannerPreviewProp> = (props) => {
+const BannerPreview: React.FC<BannerPreviewProp> = ({
+  bannerData,
+  disableClick
+}) => {
   const desktopBannerContext = useDesktopBannerContext();
   const dialogContext = useDialogContext();
 
   const onBannerContainerClick = useCallback(() => {
-    if(props.disableClick) return;
+    if (disableClick) return;
 
     dialogContext?.setDialog(<ContainerDialog />);
-  }, [dialogContext, props.disableClick]);
+  }, [dialogContext, disableClick]);
 
-  const onBannerStripClick = useCallback((event) => {
-    if(props.disableClick) return;
+  const onBannerStripClick = useCallback(
+    (event) => {
+      if (disableClick) return;
 
-    event.stopPropagation();
-    dialogContext?.setDialog(<StripDialog />);
-  }, [dialogContext, props.disableClick]);
+      event.stopPropagation();
+      dialogContext?.setDialog(<StripDialog />);
+    },
+    [dialogContext, disableClick]
+  );
 
-  const onBannerTitleClick = useCallback((event) => {
-    if(props.disableClick) return;
+  const onBannerTitleClick = useCallback(
+    (event) => {
+      if (disableClick) return;
 
-    event.stopPropagation();
-    dialogContext?.setDialog(<TitleDialog />);
-  }, [dialogContext, props.disableClick]);
+      event.stopPropagation();
+      dialogContext?.setDialog(<TitleDialog />);
+    },
+    [dialogContext, disableClick]
+  );
 
-  const onBannerSubtitleClick = useCallback((event) => {
-    if(props.disableClick) return;
+  const onBannerSubtitleClick = useCallback(
+    (event) => {
+      if (disableClick) return;
 
-    event.stopPropagation();
-    dialogContext?.setDialog(<SubtitleDialog />);
-  }, [dialogContext, props.disableClick]);
+      event.stopPropagation();
+      dialogContext?.setDialog(<SubtitleDialog />);
+    },
+    [dialogContext, disableClick]
+  );
 
-  const onBannerButtonClick = useCallback((event) => {
-    if(props.disableClick) return;
+  const onBannerButtonClick = useCallback(
+    (event) => {
+      if (disableClick) return;
 
-    event.stopPropagation();
-    dialogContext?.setDialog(<ButtonDialog />);
-  }, [dialogContext, props.disableClick]);
+      event.stopPropagation();
+      dialogContext?.setDialog(<ButtonDialog />);
+    },
+    [dialogContext, disableClick]
+  );
 
-  let bannerData = desktopBannerContext?.bannerData;
-  if(!bannerData) return null;
-  if(props.bannerData) bannerData = { ...bannerData, ...props.bannerData };
+  let banner = desktopBannerContext?.bannerData;
+  if (!banner) return null;
+  if (banner) banner = { ...banner, ...bannerData };
 
   return (
-    <Container {...bannerData.container} onClick={onBannerContainerClick}>
-      {bannerData.strip && <Strip {...bannerData.strip} onClick={onBannerStripClick}>{bannerData.strip.text}</Strip>}
+    <Container {...banner.container} onClick={onBannerContainerClick}>
+      {banner.strip && (
+        <Strip {...banner.strip} onClick={onBannerStripClick}>
+          {banner.strip.text}
+        </Strip>
+      )}
       <TextContainer>
-        {bannerData.title && <TextTitle {...bannerData.title} onClick={onBannerTitleClick}>{bannerData.title.text}</TextTitle>}
-        {bannerData.subtitle && <TextSubtitle {...bannerData.subtitle} onClick={onBannerSubtitleClick}>{bannerData.subtitle.text}</TextSubtitle>}
+        {banner.title && (
+          <TextTitle {...banner.title} onClick={onBannerTitleClick}>
+            {banner.title.text}
+          </TextTitle>
+        )}
+        {banner.subtitle && (
+          <TextSubtitle {...banner.subtitle} onClick={onBannerSubtitleClick}>
+            {banner.subtitle.text}
+          </TextSubtitle>
+        )}
       </TextContainer>
-      {bannerData.button && <Button {...bannerData.button} onClick={onBannerButtonClick}>{bannerData.button.text}</Button>}
+      {banner.button && (
+        <Button {...banner.button} onClick={onBannerButtonClick}>
+          {banner.button.text}
+        </Button>
+      )}
     </Container>
   );
-}
+};
 
 const Container = styled.div<DesktopBannerContainerData>`
   position: relative;
@@ -86,9 +117,15 @@ const Container = styled.div<DesktopBannerContainerData>`
   align-items: center;
   width: 100%;
   height: 120px;
-  ${({ backgroundType, backgroundColor, backgroundColorLinear01, backgroundColorLinear02 }) => {
-    if(backgroundType === 'normal') return `background-color: ${backgroundColor};`
-    return `background-image: linear-gradient(to right, ${backgroundColorLinear01}, ${backgroundColorLinear02});`
+  ${({
+    backgroundType,
+    backgroundColor,
+    backgroundColorLinear01,
+    backgroundColorLinear02
+  }) => {
+    if (backgroundType === 'normal')
+      return `background-color: ${backgroundColor};`;
+    return `background-image: linear-gradient(to right, ${backgroundColorLinear01}, ${backgroundColorLinear02});`;
   }}
   cursor: pointer;
 `;
@@ -116,22 +153,22 @@ const TextTitle = styled.h1<DesktopBannerTitleData>`
   font-size: 1.5em;
   font-weight: bold;
   text-align: center;
-  color: ${({fontColor}) => fontColor };
+  color: ${({ fontColor }) => fontColor};
 `;
 
 const TextSubtitle = styled.h1<DesktopBannerSubtitleData>`
-  font-size: ${({size}) => size === 'big' ? '1.5em' : '1.2em' };
+  font-size: ${({ size }) => (size === 'big' ? '1.5em' : '1.2em')};
   font-weight: bold;
   text-align: center;
-  color: ${({fontColor}) => fontColor };
+  color: ${({ fontColor }) => fontColor};
   margin-top: 5px;
 `;
 
 const Button = styled.div<DesktopBannerButtonData>`
   max-width: 350px;
   padding: 20px 30px;
-  background-color: ${({backgroundColor}) => backgroundColor || "#000"};
-  color: ${({fontColor}) => fontColor || "#FFF"};
+  background-color: ${({ backgroundColor }) => backgroundColor || '#000'};
+  color: ${({ fontColor }) => fontColor || '#FFF'};
   border-radius: 30px;
   font-size: 1.3em;
   font-weight: bold;

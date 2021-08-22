@@ -1,20 +1,20 @@
 type ProviderPropsData = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 type UniversitiesData = {
-  type: string,
-  ids?: Array<number>
-}
+  type: string;
+  ids?: Array<number>;
+};
 
 type UserAccessData = {
-  type: string,
-  trialReason?: string,
-}
+  type: string;
+  trialReason?: string;
+};
 
 type BannerPublicData = {
-  universities: UniversitiesData,
-  userAccess: UserAccessData
-}
+  universities: UniversitiesData;
+  userAccess: UserAccessData;
+};
 
-export type { ProviderPropsData, BannerPublicData, };
+export type { ProviderPropsData, BannerPublicData };

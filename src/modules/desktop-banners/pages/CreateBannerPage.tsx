@@ -3,15 +3,18 @@ import styled from 'styled-components';
 
 import { BaseDialog } from 'modules/shared/dialogs';
 import { shadows } from 'modules/shared/styles';
-import { 
-  BannerPreview, 
-  AddElementToBannerButton, 
-  BannerPublicPreview, 
+import {
+  BannerPreview,
+  AddElementToBannerButton,
+  BannerPublicPreview,
   UpdateBannerPublicButton,
   BannerInternalInfoForm,
   CreateBannerButton
 } from 'modules/desktop-banners/components';
-import { AddElementDialog, EditBannerPublicDialog } from 'modules/desktop-banners/dialogs';
+import {
+  AddElementDialog,
+  EditBannerPublicDialog
+} from 'modules/desktop-banners/dialogs';
 import { DesktopBannerProvider } from 'modules/desktop-banners/providers';
 import { useDialogContext } from 'modules/shared/providers/DialogProvider';
 
@@ -19,11 +22,11 @@ const CreateBannerPage: React.FC = () => {
   const dialogContext = useDialogContext();
 
   const openAddElementDialog = useCallback(() => {
-    dialogContext?.setDialog(<AddElementDialog />)
+    dialogContext?.setDialog(<AddElementDialog />);
   }, [dialogContext]);
 
   const openEditBannerPublicDialog = useCallback(() => {
-    dialogContext?.setDialog(<EditBannerPublicDialog />)
+    dialogContext?.setDialog(<EditBannerPublicDialog />);
   }, [dialogContext]);
 
   return (
@@ -45,13 +48,13 @@ const CreateBannerPage: React.FC = () => {
       <BaseDialog />
     </DesktopBannerProvider>
   );
-}
+};
 
 const Container = styled.div`
   width: 1080px;
   max-width: 95%;
   margin: 60px auto 30px auto;
-  background-color: #FFF;
+  background-color: #fff;
   padding: 30px;
   border-radius: 20px;
   ${shadows.cardShadow};
@@ -59,7 +62,7 @@ const Container = styled.div`
 
 type TitleData = {
   marginTop?: string;
-}
+};
 
 const Title = styled.h1<TitleData>`
   width: 100%;

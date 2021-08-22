@@ -7,12 +7,12 @@ import UpdateBannerPublicButton from './UpdateBannerPublicButton';
 import BannerInternalInfoForm from './BannerInternalInfoForm';
 import CreateBannerButton from './CreateBannerButton';
 
-export { 
-  Banner, 
-  AddBannerButton, 
-  BannerPreview, 
-  AddElementToBannerButton, 
-  BannerPublicPreview, 
+export {
+  Banner,
+  AddBannerButton,
+  BannerPreview,
+  AddElementToBannerButton,
+  BannerPublicPreview,
   UpdateBannerPublicButton,
   BannerInternalInfoForm,
   CreateBannerButton

@@ -6,27 +6,35 @@ import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { colors } from 'modules/shared/styles';
 import { BannerDataQuery } from 'modules/desktop-banners/types';
 
-const Banner: React.FC<{data: BannerDataQuery}> = ({ data }) => {
+const Banner: React.FC<{ data: BannerDataQuery }> = ({ data }) => {
   const onEditClick = useCallback(() => {
     // TO-DO redirect to edit page
-    console.log("Click on edit");
+    console.log('Click on edit');
   }, []);
 
   const onDeleteClick = useCallback(() => {
     // TO-DO delete banner
-    console.log("Click on delete");
+    console.log('Click on delete');
   }, []);
 
   return (
     <Container>
       <Name>{data.name}</Name>
       <ButtonsContainer>
-        <CustomIcon icon={faEdit} color={colors.warningOrangeColor} onClick={onEditClick} />
-        <CustomIcon icon={faTrash} color={colors.warningRedColor} onClick={onDeleteClick} />
+        <CustomIcon
+          icon={faEdit}
+          color={colors.warningOrangeColor}
+          onClick={onEditClick}
+        />
+        <CustomIcon
+          icon={faTrash}
+          color={colors.warningRedColor}
+          onClick={onDeleteClick}
+        />
       </ButtonsContainer>
     </Container>
   );
-}
+};
 
 const Container = styled.div`
   width: 100%;
@@ -43,12 +51,11 @@ const Name = styled.div`
   font-weight: bold;
 `;
 
-const ButtonsContainer = styled.div`
-`;
+const ButtonsContainer = styled.div``;
 
 const CustomIcon = styled(FontAwesomeIcon)`
   cursor: pointer;
-  color: ${({color}) => color};
+  color: ${({ color }) => color};
   margin: 0 5px;
 `;
 

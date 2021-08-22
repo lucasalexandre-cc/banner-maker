@@ -11,32 +11,40 @@ const AddElementDialog: React.FC = () => {
   const dialogContext = useDialogContext();
   const desktopBannerContext = useDesktopBannerContext();
 
-  const onClickElement = useCallback((event, element) => {
-    event.stopPropagation();
+  const onClickElement = useCallback(
+    (event, element) => {
+      event.stopPropagation();
 
-    dialogContext?.setDialog(element.getDialog())
-  }, [dialogContext]);
+      dialogContext?.setDialog(element.getDialog());
+    },
+    [dialogContext]
+  );
 
   const filteredElements = useMemo(() => {
     const bannerData = desktopBannerContext?.bannerData;
-    if(!bannerData) return desktopBannerElements;
+    if (!bannerData) return desktopBannerElements;
 
     const bannerDataKeys = Object.keys(bannerData);
-    return desktopBannerElements.filter(element => !bannerDataKeys.includes(element.id));
+    return desktopBannerElements.filter(
+      (element) => !bannerDataKeys.includes(element.id)
+    );
   }, [desktopBannerContext]);
 
   return (
     <DefaultDialogContainer>
       <Title>Adicione um elemento ao banner</Title>
-      {filteredElements.map(element => (
-        <Element key={element.id} onClick={event => onClickElement(event, element)}>
+      {filteredElements.map((element) => (
+        <Element
+          key={element.id}
+          onClick={(event) => onClickElement(event, element)}
+        >
           <ElementName>{element.cta}</ElementName>
-          <BannerPreview bannerData={element.defaultData} disableClick={true} />
+          <BannerPreview bannerData={element.defaultData} disableClick />
         </Element>
       ))}
     </DefaultDialogContainer>
   );
-}
+};
 
 const Title = styled.h1`
   width: 100%;

@@ -3,22 +3,29 @@ import styled from 'styled-components';
 import { CompactPicker } from 'react-color';
 
 type ColorInputPickerProps = {
-  label: string,
-  onChange: (newColor: string) => void,
-  color?: string,
-}
+  label: string;
+  onChange: (newColor: string) => void;
+  color?: string;
+};
 
-const ColorInputPicker: React.FC<ColorInputPickerProps> = ({ label, color, onChange }) => {  
+const ColorInputPicker: React.FC<ColorInputPickerProps> = ({
+  label,
+  color,
+  onChange
+}) => {
   const [open, setOpen] = useState(false);
 
-  const onChooseColor = useCallback((newColor) => {
-    setOpen(false);
-    onChange(newColor.hex);
-  }, [setOpen, onChange]);
+  const onChooseColor = useCallback(
+    (newColor) => {
+      setOpen(false);
+      onChange(newColor.hex);
+    },
+    [setOpen, onChange]
+  );
 
   const onClickInput = useCallback((event) => {
     event.stopPropagation();
-    setOpen(true)
+    setOpen(true);
   }, []);
 
   return (
@@ -27,7 +34,7 @@ const ColorInputPicker: React.FC<ColorInputPickerProps> = ({ label, color, onCha
       <PickedColor color={color} />
       {open && <CustomPicker onChangeComplete={onChooseColor} />}
     </Container>
-  )
+  );
 };
 
 const Container = styled.div`
@@ -42,7 +49,7 @@ const Container = styled.div`
 const PickedColor = styled.div`
   width: 20px;
   height: 20px;
-  background-color: ${({color}) => color || "#000"};
+  background-color: ${({ color }) => color || '#000'};
   margin: 0 10px;
 `;
 
@@ -52,7 +59,3 @@ const CustomPicker = styled(CompactPicker)`
 `;
 
 export default ColorInputPicker;
-
-
-
-
