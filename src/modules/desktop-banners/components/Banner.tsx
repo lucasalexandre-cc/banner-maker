@@ -4,15 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { colors } from 'modules/shared/styles';
+import { BannerDataQuery } from 'modules/desktop-banners/types';
 
-type BannerData = {
-  data: {
-    id: number,
-    name: string,
-  }
-};
-
-const Banner: React.FC<BannerData> = ({ data }) => {
+const Banner: React.FC<{data: BannerDataQuery}> = ({ data }) => {
   const onEditClick = useCallback(() => {
     // TO-DO redirect to edit page
     console.log("Click on edit");

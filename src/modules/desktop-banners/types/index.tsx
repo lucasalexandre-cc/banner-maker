@@ -59,6 +59,11 @@ type CreateBannerResponseData = {
   successMessage?:string
 };
 
+type BannerDataQuery = {
+  id: number,
+  name: string
+}
+
 // to-do remove any
 type DesktopBannerContextData = {
   bannerData: DesktopBannerData,
@@ -78,4 +83,5 @@ export type {
   DesktopBannerLightData,
   DesktopBannerContextData,
   CreateBannerResponseData,
+  BannerDataQuery,
 };
