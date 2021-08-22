@@ -1,23 +1,33 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
+import { useQuery } from "@apollo/client";
 
 import { shadows, } from 'modules/shared/styles';
 import { Banner, AddBannerButton } from 'modules/desktop-banners/components';
-import { banners } from 'fake-data';
+import { GET_DESKTOP_BANNERS } from 'modules/desktop-banners/queries/desktop-banner-queries';
+
+type BannerQueryType = {
+  id: number,
+  name: string
+}
 
 const BannersListPage: React.FC = () => {
   const history = useHistory();
+  const { data: bannersResponse, error, loading } = useQuery<{bannerMakerGetBanners: Array<BannerQueryType>}>(GET_DESKTOP_BANNERS);
 
   const onClickCreateBanner = useCallback(() => {
     history.push('/desktop-banner/create');
   }, [history]);
 
+  if(error || loading) return null;
+
+  const banners = bannersResponse?.bannerMakerGetBanners;
   return (
     <Container>
       <Title>Lista de banners</Title>
       <ListContainer>
-        {banners.map(banner => (
+        {banners?.map(banner => (
           <Banner key={banner.id} data={banner} />
         ))}
       </ListContainer>
