@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   StripDialog,
   TitleDialog,
@@ -17,7 +18,7 @@ const desktopBannerElements = [
         backgroundColor: '#ca12b2'
       }
     },
-    getDialog: () => <StripDialog />
+    getDialog: (): JSX.Element => <StripDialog />
   },
   {
     id: 'title',
@@ -28,7 +29,7 @@ const desktopBannerElements = [
         fontColor: '#ca12b2'
       }
     },
-    getDialog: () => <TitleDialog />
+    getDialog: (): JSX.Element => <TitleDialog />
   },
   {
     id: 'subtitle',
@@ -40,7 +41,7 @@ const desktopBannerElements = [
         size: 'normal'
       }
     },
-    getDialog: () => <SubtitleDialog />
+    getDialog: (): JSX.Element => <SubtitleDialog />
   },
   {
     id: 'button',
@@ -52,7 +53,7 @@ const desktopBannerElements = [
         backgroundColor: '#ca12b2'
       }
     },
-    getDialog: () => <ButtonDialog />
+    getDialog: (): JSX.Element => <ButtonDialog />
   }
 ];
 

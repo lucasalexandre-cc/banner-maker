@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
@@ -6,21 +6,22 @@ import { useQuery } from '@apollo/client';
 import { shadows } from 'modules/shared/styles';
 import { Banner, AddBannerButton } from 'modules/desktop-banners/components';
 import { GET_DESKTOP_BANNERS } from 'modules/desktop-banners/queries/desktop-banner-queries';
-
-type BannerQueryType = {
-  id: number;
-  name: string;
-};
+import { BannerQueryType } from 'modules/desktop-banners/types/queries';
 
 const BannersListPage: React.FC = () => {
   const history = useHistory();
   const {
     data: bannersResponse,
     error,
-    loading
+    loading,
+    refetch
   } = useQuery<{ bannerMakerGetBanners: Array<BannerQueryType> }>(
     GET_DESKTOP_BANNERS
   );
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   const onClickCreateBanner = useCallback(() => {
     history.push('/desktop-banner/create');

@@ -6,9 +6,9 @@ import { CREATE_DESKTOP_BANNER } from 'modules/desktop-banners/queries/desktop-b
 import { useValidate } from 'modules/desktop-banners/hooks';
 import type {
   DesktopBannerContextData,
-  DesktopBannerData,
-  CreateBannerResponseData
+  DesktopBannerData
 } from 'modules/desktop-banners/types';
+import type { GraphqlMutationResponseData } from 'modules/desktop-banners/types/queries';
 import type { ProviderPropsData } from 'modules/shared/types';
 
 type ContextValue = DesktopBannerContextData | null;
@@ -18,7 +18,7 @@ export const DesktopBannerContext = createContext<ContextValue>(null);
 const DesktopBannerProvider: React.FC<ProviderPropsData> = ({ children }) => {
   const [bannerData, setBannerData] = useState(INITIAL_BANNER_DATA);
   const [createBannerReq] = useMutation<{
-    createDesktopBanner: CreateBannerResponseData;
+    createDesktopBanner: GraphqlMutationResponseData;
   }>(CREATE_DESKTOP_BANNER);
   const { validateBannerData } = useValidate();
 

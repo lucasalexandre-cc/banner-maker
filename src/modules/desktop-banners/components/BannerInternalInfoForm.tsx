@@ -19,7 +19,6 @@ const BannerInternalInfoForm: React.FC = () => {
   const bannerData = desktopBannerContext?.bannerData;
   if (!bannerData) return null;
 
-  console.log(bannerData);
   return (
     <Container>
       <CustomInput

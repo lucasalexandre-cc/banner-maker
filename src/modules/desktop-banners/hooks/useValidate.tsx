@@ -10,7 +10,11 @@ import {
   BannerPublicData
 } from 'modules/desktop-banners/types';
 
-export default function useValidate() {
+type UseValidateMethods = {
+  validateBannerData: (bannerData: DesktopBannerData) => Array<string>;
+};
+
+export default function useValidate(): UseValidateMethods {
   const getContainerDataErrors = useCallback(
     (containerData: DesktopBannerContainerData): Array<string> => {
       const errors: Array<string> = [];

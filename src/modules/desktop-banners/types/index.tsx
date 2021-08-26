@@ -1,4 +1,5 @@
 import type { BannerPublicData } from 'modules/shared/types';
+import type { GraphqlMutationResponseData } from './queries';
 
 type DesktopBannerContainerData = {
   backgroundType: string;
@@ -51,23 +52,12 @@ type DesktopBannerLightData = {
   button?: DesktopBannerButtonData;
 };
 
-type CreateBannerResponseData = {
-  success: boolean;
-  errorMessage?: string;
-  successMessage?: string;
-};
-
-type BannerDataQuery = {
-  id: number;
-  name: string;
-};
-
 // to-do remove any
 type DesktopBannerContextData = {
   bannerData: DesktopBannerData;
   updateBannerData: (key: string, value: any) => void;
   deleteData: (key: any) => void;
-  createBanner: () => Promise<CreateBannerResponseData | undefined | null>;
+  createBanner: () => Promise<GraphqlMutationResponseData | undefined | null>;
 };
 
 export type {
@@ -79,7 +69,5 @@ export type {
   BannerPublicData,
   DesktopBannerData,
   DesktopBannerLightData,
-  DesktopBannerContextData,
-  CreateBannerResponseData,
-  BannerDataQuery
+  DesktopBannerContextData
 };
