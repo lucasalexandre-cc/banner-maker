@@ -1,20 +1,42 @@
 import React, { useCallback } from 'react';
+import { useMutation } from '@apollo/client';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { colors } from 'modules/shared/styles';
-import { BannerDataQuery } from 'modules/desktop-banners/types';
+import { GraphqlMutationResponseData } from 'modules/desktop-banners/types/queries';
+import { DELETE_BANNER } from 'modules/shared/queries/banner-queries';
 
-const Banner: React.FC<{ data: BannerDataQuery }> = ({ data }) => {
+type BannerData = {
+  id: number;
+  name: string;
+};
+
+const Banner: React.FC<{ data: BannerData }> = ({ data }) => {
+  const [deleteBannerReq] = useMutation<{
+    deleteBanner: GraphqlMutationResponseData;
+  }>(DELETE_BANNER);
+
   const onEditClick = useCallback(() => {
     // TO-DO redirect to edit page
-    console.log('Click on edit');
   }, []);
 
-  const onDeleteClick = useCallback(() => {
-    // TO-DO delete banner
-    console.log('Click on delete');
+  const onDeleteClick = useCallback(async () => {
+    const response = await deleteBannerReq({
+      variables: { bannerId: data.id }
+    });
+    const responseData = response.data?.deleteBanner;
+    if (responseData?.success) {
+      alert('Banner excluido com sucesso!');
+      window.location.reload();
+      return;
+    }
+
+    alert(
+      responseData?.errorMessage ||
+        'Erro ao excluir banner. Entre em contato com um desenvolvedor.'
+    );
   }, []);
 
   return (

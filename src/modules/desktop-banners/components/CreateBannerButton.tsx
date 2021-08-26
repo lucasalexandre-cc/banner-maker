@@ -1,11 +1,13 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 
 import { useDesktopBannerContext } from 'modules/desktop-banners/providers/DesktopBannerProvider';
 
 const CreateBannerButton: React.FC = () => {
   const desktopBannerContext = useDesktopBannerContext();
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   const onCreateBannerClick = useCallback(async () => {
     if (loading) return;
@@ -13,12 +15,15 @@ const CreateBannerButton: React.FC = () => {
     setLoading(true);
     const responseData = await desktopBannerContext?.createBanner();
     if (responseData?.success) {
-      alert(
-        'Banner criado com sucesso. Agora tenho que redirecionar ele pra lista de banners com um aviso que foi criado'
-      );
-    } else {
-      alert(responseData?.errorMessage);
+      alert('Banner criado com sucesso.');
+      history.push('/desktop-banner');
+      return;
     }
+
+    alert(
+      responseData?.errorMessage ||
+        'Erro ao criar banner. Entre em contato com um desenvolvedor'
+    );
     setLoading(false);
   }, [desktopBannerContext, loading]);
 
