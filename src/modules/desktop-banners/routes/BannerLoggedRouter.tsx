@@ -3,7 +3,7 @@ import { Route, useRouteMatch } from 'react-router-dom';
 
 import {
   BannersListPage,
-  CreateBannerPage
+  CreateAndEditBannerPage
 } from 'modules/desktop-banners/pages';
 
 const DesktopBannerLoggedRouter: React.FC = () => {
@@ -12,7 +12,12 @@ const DesktopBannerLoggedRouter: React.FC = () => {
   return (
     <>
       <Route exact path={`${url}/`} component={BannersListPage} />
-      <Route exact path={`${url}/create`} component={CreateBannerPage} />
+      <Route exact path={`${url}/create`} component={CreateAndEditBannerPage} />
+      <Route
+        exact
+        path={`${url}/edit/:bannerId`}
+        component={CreateAndEditBannerPage}
+      />
     </>
   );
 };

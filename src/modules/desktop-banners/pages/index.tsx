@@ -1,4 +1,4 @@
 import BannersListPage from './BannersListPage';
-import CreateBannerPage from './CreateBannerPage';
+import CreateAndEditBannerPage from './CreateAndEditBannerPage';
 
-export { BannersListPage, CreateBannerPage };
+export { BannersListPage, CreateAndEditBannerPage };

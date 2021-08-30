@@ -5,7 +5,7 @@ import AddElementToBannerButton from './AddElementToBannerButton';
 import BannerPublicPreview from './BannerPublicPreview';
 import UpdateBannerPublicButton from './UpdateBannerPublicButton';
 import BannerInternalInfoForm from './BannerInternalInfoForm';
-import CreateBannerButton from './CreateBannerButton';
+import SaveBannerButton from './SaveBannerButton';
 
 export {
   Banner,
@@ -15,5 +15,5 @@ export {
   BannerPublicPreview,
   UpdateBannerPublicButton,
   BannerInternalInfoForm,
-  CreateBannerButton
+  SaveBannerButton
 };

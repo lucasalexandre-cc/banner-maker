@@ -1,5 +1,7 @@
-import type { BannerPublicData } from 'modules/shared/types';
-import type { GraphqlMutationResponseData } from './queries';
+import type {
+  BannerPublicData,
+  GraphqlMutationResponseData
+} from 'modules/shared/types';
 
 type DesktopBannerContainerData = {
   backgroundType: string;
@@ -40,8 +42,8 @@ type DesktopBannerData = {
   button?: DesktopBannerButtonData;
   public: BannerPublicData;
   name?: string;
-  initialDate?: Date;
-  endDate?: Date;
+  initialDate?: Date | string;
+  endDate?: Date | string;
 };
 
 type DesktopBannerLightData = {
@@ -57,7 +59,7 @@ type DesktopBannerContextData = {
   bannerData: DesktopBannerData;
   updateBannerData: (key: string, value: any) => void;
   deleteData: (key: any) => void;
-  createBanner: () => Promise<GraphqlMutationResponseData | undefined | null>;
+  saveBanner: () => Promise<GraphqlMutationResponseData | undefined | null>;
 };
 
 export type {

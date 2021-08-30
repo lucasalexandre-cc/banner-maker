@@ -17,4 +17,25 @@ type BannerPublicData = {
   userAccess: UserAccessData;
 };
 
-export type { ProviderPropsData, BannerPublicData };
+type EditRouteParam = {
+  bannerId?: string;
+};
+
+type BannerQueryType = {
+  id: number;
+  name: string;
+};
+
+type GraphqlMutationResponseData = {
+  success: boolean;
+  errorMessage?: string;
+  successMessage?: string;
+};
+
+export type {
+  ProviderPropsData,
+  BannerPublicData,
+  EditRouteParam,
+  BannerQueryType,
+  GraphqlMutationResponseData
+};

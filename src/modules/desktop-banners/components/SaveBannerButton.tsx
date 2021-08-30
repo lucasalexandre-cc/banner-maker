@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import { useDesktopBannerContext } from 'modules/desktop-banners/providers/DesktopBannerProvider';
 
-const CreateBannerButton: React.FC = () => {
+const SaveBannerButton: React.FC = () => {
   const desktopBannerContext = useDesktopBannerContext();
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -13,7 +13,7 @@ const CreateBannerButton: React.FC = () => {
     if (loading) return;
 
     setLoading(true);
-    const responseData = await desktopBannerContext?.createBanner();
+    const responseData = await desktopBannerContext?.saveBanner();
     if (responseData?.success) {
       alert('Banner criado com sucesso.');
       history.push('/desktop-banner');
@@ -22,14 +22,14 @@ const CreateBannerButton: React.FC = () => {
 
     alert(
       responseData?.errorMessage ||
-        'Erro ao criar banner. Entre em contato com um desenvolvedor'
+        'Erro ao salvar banner. Entre em contato com um desenvolvedor'
     );
     setLoading(false);
   }, [desktopBannerContext, loading]);
 
   return (
     <Container onClick={onCreateBannerClick}>
-      {loading ? 'Criando...' : 'Criar banner'}
+      {loading ? 'Salvando...' : 'Salvar banner'}
     </Container>
   );
 };
@@ -45,4 +45,4 @@ const Container = styled.div`
   cursor: pointer;
 `;
 
-export default CreateBannerButton;
+export default SaveBannerButton;

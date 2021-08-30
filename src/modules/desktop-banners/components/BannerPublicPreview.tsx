@@ -70,7 +70,9 @@ const BannerPublicPreview: React.FC = () => {
         <>
           {desktopBannerContext?.bannerData.public.universities.ids?.map(
             (universityId) => (
-              <UniversityName>{getUniversityName(universityId)}</UniversityName>
+              <UniversityName key={universityId}>
+                {getUniversityName(universityId)}
+              </UniversityName>
             )
           )}
         </>

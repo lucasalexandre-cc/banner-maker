@@ -1,15 +1,29 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
-import { useMutation } from '@apollo/client';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect
+} from 'react';
+import { useMutation, useLazyQuery } from '@apollo/client';
+import { useParams } from 'react-router-dom';
 
 import { colors } from 'modules/shared/styles';
-import { CREATE_DESKTOP_BANNER } from 'modules/desktop-banners/queries/desktop-banner-queries';
+import {
+  CREATE_DESKTOP_BANNER,
+  EDIT_DESKTOP_BANNER,
+  GET_DESKTOP_BANNER
+} from 'modules/desktop-banners/queries/desktop-banner-queries';
 import { useValidate } from 'modules/desktop-banners/hooks';
 import type {
   DesktopBannerContextData,
   DesktopBannerData
 } from 'modules/desktop-banners/types';
-import type { GraphqlMutationResponseData } from 'modules/desktop-banners/types/queries';
-import type { ProviderPropsData } from 'modules/shared/types';
+import type {
+  ProviderPropsData,
+  EditRouteParam,
+  GraphqlMutationResponseData
+} from 'modules/shared/types';
 
 type ContextValue = DesktopBannerContextData | null;
 
@@ -20,7 +34,37 @@ const DesktopBannerProvider: React.FC<ProviderPropsData> = ({ children }) => {
   const [createBannerReq] = useMutation<{
     createDesktopBanner: GraphqlMutationResponseData;
   }>(CREATE_DESKTOP_BANNER);
+  const [editBannerReq] = useMutation<{
+    editDesktopBanner: GraphqlMutationResponseData;
+  }>(EDIT_DESKTOP_BANNER);
+  const [loadBannerReq, { data: loadBannerReqResponse }] = useLazyQuery<{
+    bannerMakerGetDesktopBannerFullData: DesktopBannerData;
+  }>(GET_DESKTOP_BANNER, { fetchPolicy: 'network-only' });
   const { validateBannerData } = useValidate();
+  const { bannerId } = useParams<EditRouteParam>();
+
+  useEffect(() => {
+    loadBannerReq({ variables: { bannerId } });
+  }, [bannerId]);
+
+  useEffect(() => {
+    if (!loadBannerReqResponse) return;
+    const data = loadBannerReqResponse.bannerMakerGetDesktopBannerFullData;
+
+    const newBannerData = { ...data };
+    if (
+      newBannerData.initialDate &&
+      typeof newBannerData.initialDate === 'string'
+    ) {
+      newBannerData.initialDate = new Date(newBannerData.initialDate);
+    }
+
+    if (newBannerData.endDate && typeof newBannerData.endDate === 'string') {
+      newBannerData.endDate = new Date(newBannerData.endDate);
+    }
+
+    setBannerData(newBannerData);
+  }, [loadBannerReqResponse]);
 
   const updateBannerData = useCallback(
     (key, value) => {
@@ -38,17 +82,25 @@ const DesktopBannerProvider: React.FC<ProviderPropsData> = ({ children }) => {
     [bannerData, setBannerData]
   );
 
-  const createBanner = useCallback(async () => {
+  const saveBanner = useCallback(async () => {
     const errors = validateBannerData(bannerData);
     if (errors.length > 0) {
       alert(errors.join('.\n'));
       return null;
     }
-    const response = await createBannerReq({
-      variables: { bannerData, bannerType: 'desktop' }
+
+    if (!bannerId) {
+      const response = await createBannerReq({
+        variables: { bannerData, bannerType: 'desktop' }
+      });
+      return response.data?.createDesktopBanner;
+    }
+
+    const response = await editBannerReq({
+      variables: { bannerData, bannerId }
     });
-    return response.data?.createDesktopBanner;
-  }, [bannerData, createBannerReq, validateBannerData]);
+    return response.data?.editDesktopBanner;
+  }, [bannerData, createBannerReq, editBannerReq, validateBannerData]);
 
   return (
     <DesktopBannerContext.Provider
@@ -56,7 +108,7 @@ const DesktopBannerProvider: React.FC<ProviderPropsData> = ({ children }) => {
         bannerData,
         updateBannerData,
         deleteData,
-        createBanner
+        saveBanner
       }}
     >
       {children}

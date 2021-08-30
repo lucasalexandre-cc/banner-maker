@@ -6,6 +6,7 @@ import { useDesktopBannerContext } from 'modules/desktop-banners/providers/Deskt
 import { DefaultDialogContainer } from 'modules/shared/components';
 import { BannerPreview } from 'modules/desktop-banners/components';
 import { desktopBannerElements } from 'modules/desktop-banners/data';
+import type { DesktopBannerData } from 'modules/desktop-banners/types';
 
 const AddElementDialog: React.FC = () => {
   const dialogContext = useDialogContext();
@@ -24,9 +25,15 @@ const AddElementDialog: React.FC = () => {
     const bannerData = desktopBannerContext?.bannerData;
     if (!bannerData) return desktopBannerElements;
 
-    const bannerDataKeys = Object.keys(bannerData);
+    const bannerDataKeys = Object.keys(bannerData) as Array<
+      keyof DesktopBannerData
+    >;
+    const bannerDataKeysNotNull = bannerDataKeys.filter(
+      (key) => !!bannerData[key]
+    );
     return desktopBannerElements.filter(
-      (element) => !bannerDataKeys.includes(element.id)
+      (element) =>
+        !bannerDataKeysNotNull.includes(element.id as keyof DesktopBannerData)
     );
   }, [desktopBannerContext]);
 

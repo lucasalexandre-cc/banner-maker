@@ -9,7 +9,7 @@ import {
   BannerPublicPreview,
   UpdateBannerPublicButton,
   BannerInternalInfoForm,
-  CreateBannerButton
+  SaveBannerButton
 } from 'modules/desktop-banners/components';
 import {
   AddElementDialog,
@@ -18,7 +18,7 @@ import {
 import { DesktopBannerProvider } from 'modules/desktop-banners/providers';
 import { useDialogContext } from 'modules/shared/providers/DialogProvider';
 
-const CreateBannerPage: React.FC = () => {
+const CreateAndEditBannerPage: React.FC = () => {
   const dialogContext = useDialogContext();
 
   const openAddElementDialog = useCallback(() => {
@@ -43,7 +43,7 @@ const CreateBannerPage: React.FC = () => {
         <BannerPublicPreview />
         <UpdateBannerPublicButton onClick={openEditBannerPublicDialog} />
 
-        <CreateBannerButton />
+        <SaveBannerButton />
       </Container>
       <BaseDialog />
     </DesktopBannerProvider>
@@ -73,4 +73,4 @@ const Title = styled.h1<TitleData>`
   ${({ marginTop }) => marginTop && `margin-top: ${marginTop};`}
 `;
 
-export default CreateBannerPage;
+export default CreateAndEditBannerPage;

@@ -1,11 +1,12 @@
 import React, { useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { colors } from 'modules/shared/styles';
-import { GraphqlMutationResponseData } from 'modules/desktop-banners/types/queries';
+import { GraphqlMutationResponseData } from 'modules/shared/types';
 import { DELETE_BANNER } from 'modules/shared/queries/banner-queries';
 
 type BannerData = {
@@ -18,8 +19,10 @@ const Banner: React.FC<{ data: BannerData }> = ({ data }) => {
     deleteBanner: GraphqlMutationResponseData;
   }>(DELETE_BANNER);
 
+  const history = useHistory();
+
   const onEditClick = useCallback(() => {
-    // TO-DO redirect to edit page
+    history.push(`/desktop-banner/edit/${data.id}`);
   }, []);
 
   const onDeleteClick = useCallback(async () => {

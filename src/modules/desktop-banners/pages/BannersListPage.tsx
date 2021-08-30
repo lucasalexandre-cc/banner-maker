@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/client';
 import { shadows } from 'modules/shared/styles';
 import { Banner, AddBannerButton } from 'modules/desktop-banners/components';
 import { GET_DESKTOP_BANNERS } from 'modules/desktop-banners/queries/desktop-banner-queries';
-import { BannerQueryType } from 'modules/desktop-banners/types/queries';
+import { BannerQueryType } from 'modules/shared/types';
 
 const BannersListPage: React.FC = () => {
   const history = useHistory();

@@ -31,7 +31,11 @@ const BannerInternalInfoForm: React.FC = () => {
 
       <InputTitle>Data de inicio do banner</InputTitle>
       <DatePicker
-        selected={bannerData.initialDate}
+        selected={
+          typeof bannerData.initialDate !== 'string'
+            ? bannerData.initialDate
+            : null
+        }
         onChange={(result) => onUpdateInput('initialDate', result)}
         showTimeSelect
         dateFormat="Pp"
@@ -40,7 +44,9 @@ const BannerInternalInfoForm: React.FC = () => {
 
       <InputTitle>Data de fim do banner</InputTitle>
       <DatePicker
-        selected={bannerData.endDate}
+        selected={
+          typeof bannerData.endDate !== 'string' ? bannerData.endDate : null
+        }
         onChange={(result) => onUpdateInput('endDate', result)}
         showTimeSelect
         dateFormat="Pp"
