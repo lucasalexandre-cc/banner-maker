@@ -47,6 +47,24 @@ const EditBannerPublicDialog: React.FC = () => {
     setSelectedUniversities(selected);
   }, [desktopBannerContext, universitiesResponse]);
 
+  useEffect(() => {
+    if (selectedUniversities.length === 0) return;
+    if (publicBanner?.universities.type !== 'specifics') return;
+
+    const universitiesIds = selectedUniversities.map(
+      (option: any) => option.value
+    );
+    const newUniversities = {
+      ...publicBanner?.universities,
+      ids: universitiesIds
+    };
+    const newPublicBanner = {
+      ...publicBanner,
+      universities: newUniversities
+    } as BannerPublicData;
+    setPublicBanner(newPublicBanner);
+  }, [selectedUniversities]);
+
   const onUpdateUserAccess = useCallback(
     (key, value) => {
       const newUserAccess = { ...publicBanner?.userAccess, [key]: value };
@@ -94,12 +112,6 @@ const EditBannerPublicDialog: React.FC = () => {
   }, [universitiesResponse]);
 
   const onSaveBannerPublic = useCallback(() => {
-    if (publicBanner?.universities.type === 'specifics') {
-      publicBanner.universities.ids = selectedUniversities.map(
-        (option: any) => option.value
-      );
-    }
-
     desktopBannerContext?.updateBannerData('public', publicBanner);
     dialogContext?.unsetDialog();
   }, [publicBanner, selectedUniversities, desktopBannerContext, dialogContext]);
