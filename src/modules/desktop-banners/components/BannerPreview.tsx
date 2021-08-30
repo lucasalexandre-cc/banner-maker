@@ -83,38 +83,35 @@ const BannerPreview: React.FC<BannerPreviewProp> = ({
 
   return (
     <Container {...banner.container} onClick={onBannerContainerClick}>
-      {banner.strip && (
-        <Strip {...banner.strip} onClick={onBannerStripClick}>
-          {banner.strip.text}
-        </Strip>
-      )}
-      <TextContainer>
-        {banner.title && (
-          <TextTitle {...banner.title} onClick={onBannerTitleClick}>
-            {banner.title.text}
-          </TextTitle>
+      <Content>
+        {banner.strip && (
+          <Strip {...banner.strip} onClick={onBannerStripClick}>
+            {banner.strip.text}
+          </Strip>
         )}
-        {banner.subtitle && (
-          <TextSubtitle {...banner.subtitle} onClick={onBannerSubtitleClick}>
-            {banner.subtitle.text}
-          </TextSubtitle>
+        <TextContainer>
+          {banner.title && (
+            <TextTitle {...banner.title} onClick={onBannerTitleClick}>
+              {banner.title.text}
+            </TextTitle>
+          )}
+          {banner.subtitle && (
+            <TextSubtitle {...banner.subtitle} onClick={onBannerSubtitleClick}>
+              {banner.subtitle.text}
+            </TextSubtitle>
+          )}
+        </TextContainer>
+        {banner.button && (
+          <Button {...banner.button} onClick={onBannerButtonClick}>
+            {banner.button.text}
+          </Button>
         )}
-      </TextContainer>
-      {banner.button && (
-        <Button {...banner.button} onClick={onBannerButtonClick}>
-          {banner.button.text}
-        </Button>
-      )}
+      </Content>
     </Container>
   );
 };
 
 const Container = styled.div<DesktopBannerContainerData>`
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
   width: 100%;
   height: 120px;
   ${({
@@ -128,6 +125,19 @@ const Container = styled.div<DesktopBannerContainerData>`
     return `background-image: linear-gradient(to right, ${backgroundColorLinear01}, ${backgroundColorLinear02});`;
   }}
   cursor: pointer;
+`;
+
+const Content = styled.div`
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+  max-width: 1080px;
+  margin: auto;
 `;
 
 const Strip = styled.div<DesktopBannerStripData>`
