@@ -15,7 +15,7 @@ const SaveBannerButton: React.FC = () => {
     setLoading(true);
     const responseData = await desktopBannerContext?.saveBanner();
     if (responseData?.success) {
-      alert('Banner criado com sucesso.');
+      alert('Banner salvo com sucesso.');
       history.push('/desktop-banner');
       return;
     }
