@@ -2,7 +2,7 @@ import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import styled from 'styled-components';
 import { Select, MenuItem, TextField } from '@material-ui/core';
 import { useQuery } from '@apollo/client';
-import MultiSelect from 'react-multi-select-component';
+import { MultiSelect } from 'react-multi-select-component';
 import { Option } from 'react-multi-select-component/dist/lib/interfaces';
 
 import { useDesktopBannerContext } from 'modules/desktop-banners/providers/DesktopBannerProvider';
