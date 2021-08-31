@@ -3,7 +3,7 @@ FROM node:14.15
 
 RUN npm -g i npm
 
-WORKDIR /usr/src/app
+WORKDIR /ra-banner-maker
 
 COPY ./package*.json ./
 
