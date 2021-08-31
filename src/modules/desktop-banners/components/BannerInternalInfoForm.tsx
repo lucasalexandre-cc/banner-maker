@@ -28,6 +28,13 @@ const BannerInternalInfoForm: React.FC = () => {
         onChange={(event) => onUpdateInput('name', event.target.value)}
         variant="outlined"
       />
+      <ObsInfo>
+        Obs: os nomes dos eventos do amplitude serão baseador no nome do banner.
+        Por exemplo, caso o nome do banner seja &quot;Banner CAMPANHA_X
+        Vendas&quot;, os eventos do amplitude serão: &quot;Banner CAMPANHA_X
+        Vendas: Visualizou Banner&quot; e &quot;Banner CAMPANHA_X Vendas: Clicou
+        Banner&quot;.
+      </ObsInfo>
 
       <InputTitle>Data de inicio do banner</InputTitle>
       <DatePicker
@@ -70,6 +77,12 @@ const InputTitle = styled.div`
   font-size: 1.1em;
   font-weight: bold;
   margin: 5px 0;
+`;
+
+const ObsInfo = styled.div`
+  margin: 5px 0;
+  font-size: 0.75em;
+  font-weight: bold;
 `;
 
 export default BannerInternalInfoForm;
