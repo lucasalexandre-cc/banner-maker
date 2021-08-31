@@ -4,7 +4,7 @@ import ptBr from 'date-fns/locale/pt-BR';
 import { registerLocale } from 'react-datepicker';
 
 import { Header } from 'modules/shared/components';
-import { LoggedRouter } from 'modules/shared/routes';
+import { Routes } from 'modules/shared/routes';
 import RootProviders from 'modules/shared/providers/RootProviders';
 
 const App: React.FC = () => {
@@ -12,12 +12,11 @@ const App: React.FC = () => {
     registerLocale('pt-br', ptBr);
   }, []);
 
-  const userLogged = true;
   return (
     <RootProviders>
       <Container>
         <Header />
-        {userLogged && <LoggedRouter />}
+        <Routes />
       </Container>
     </RootProviders>
   );

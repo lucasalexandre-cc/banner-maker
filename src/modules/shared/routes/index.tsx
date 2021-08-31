@@ -1,3 +1,3 @@
-import LoggedRouter from './LoggedRouter';
+import Routes from './Routes';
 
-export { LoggedRouter };
+export { Routes };
