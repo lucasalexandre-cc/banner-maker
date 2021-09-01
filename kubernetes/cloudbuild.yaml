@@ -1,0 +1,65 @@
+steps:
+  # Step 1 - Inject environment variables into files
+  - name: 'gcr.io/responde-ai/envsubst'
+    args:
+      [
+        '/workspace/kubernetes/deployment.yaml',
+        '/workspace/kubernetes/deployment.yaml'
+      ]
+    env:
+      - 'COMMIT_SHA=$COMMIT_SHA'
+
+  # Step 2 - Generate the .env file
+  - name: 'gcr.io/cloud-builders/kubectl'
+    entrypoint: bash
+    args:
+      - '-c'
+      - |
+        gcloud container clusters get-credentials --project="responde-ai" --zone="us-central1-c" "ra-production-cluster-us"
+        kubectl get configmaps banner-maker-production-configmap-env -o json > configmap.json
+
+  - name: 'node:8.11.4-alpine'
+    args: ['node', '/workspace/kubernetes/json-to-env.js']
+
+  # Step 3 - Build the ra-banner-maker docker production image and push
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['pull', 'gcr.io/responde-ai/ra-banner-maker:latest']
+
+  - name: gcr.io/cloud-builders/docker
+    args:
+      [
+        'tag',
+        'gcr.io/responde-ai/ra-banner-maker:latest',
+        'gcr.io/responde-ai/ra-banner-maker:previous'
+      ]
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/responde-ai/ra-banner-maker:previous']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '--cache-from',
+        'gcr.io/responde-ai/ra-banner-maker:latest',
+        '-t',
+        'gcr.io/responde-ai/ra-banner-maker:$COMMIT_SHA',
+        '-t',
+        'gcr.io/responde-ai/ra-banner-maker:latest',
+        '-f',
+        'Dockerfile.production',
+        '.'
+      ]
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/responde-ai/ra-banner-maker:$COMMIT_SHA']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/responde-ai/ra-banner-maker:latest']
+
+  # Step 4 - Update the production deployment
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args: ['apply', '-f', '/workspace/kubernetes/deployment.yaml']
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=ra-production-cluster-us'

@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: banner-maker-production-us2-certmanager-certificate
+  namespace: default
+spec:
+  secretName: banner-maker-production-us2-certmanager-certificate
+  issuerRef:
+    name: letsencrypt-prod2
+  commonName: banner.respondeai.com.br
+  dnsNames:
+    - banner.respondeai.com.br

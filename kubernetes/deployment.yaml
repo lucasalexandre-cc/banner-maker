@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: banner-maker-production-deployment
+  namespace: default
+  labels:
+    app: banner-maker-production-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: banner-maker-production-deployment
+  template:
+    metadata:
+      labels:
+        app: banner-maker-production-deployment
+    spec:
+      volumes:
+        - name: tz-config
+          hostPath:
+            path: /usr/share/zoneinfo/America/Sao_Paulo
+      containers:
+        - name: ra-banner-maker
+          image: gcr.io/responde-ai/ra-banner-maker:${COMMIT_SHA}
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: '50m'
+              memory: '100Mi'
+            limits:
+              cpu: '200m'
+              memory: '500Mi'
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3007
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3007
+            initialDelaySeconds: 40
+            periodSeconds: 30
+          env:
+            - name: NODE_ENV
+              value: 'production'
+          volumeMounts:
+            - name: tz-config
+              mountPath: /etc/localtime
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: banner-maker-production-deployment-hpa
+  namespace: default
+  labels:
+    app: banner-maker-production-deployment
+spec:
+  maxReplicas: 7
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: banner-maker-production-deployment
+  targetCPUUtilizationPercentage: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: banner-maker-production-deployment-nodeport
+spec:
+  selector:
+    app: banner-maker-production-deployment
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3007
+      protocol: TCP
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: banner-maker-production-clusterip
+spec:
+  type: ClusterIP
+  selector:
+    app: banner-maker-production-deployment
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3007
